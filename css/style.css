@@ -27,6 +27,7 @@ h4 {
     height: 100%;
     width: 100%;
     display: flex;
+    
 }
 
 #web{
@@ -59,6 +60,7 @@ h4 {
     height: 100%;
     color: #E9FFF9;
     padding-left: 10px;
+
 }
 
 #info{
@@ -200,4 +202,22 @@ h4 {
 
 .comment{
     margin-bottom: 5px;
+}
+
+#hideopenforum{
+    padding: 2px;
+    margin: 0px;
+    font-size: 15px;
+    color: black;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-timing-function: ease-in;
+    transition: 0.5s;
+
+}
+#hideopenforum:hover{
+    background-color: #001011;
+    color: white;
 }
