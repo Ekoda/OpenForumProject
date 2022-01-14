@@ -10,3 +10,14 @@ $("#hideopenforum").on("click", function(){
         $('#web').css('width', '80%')
     }
 });
+
+/*
+
+// Optional alert message on change of page
+
+setTimeout(function() {
+    $('#web').on('load', function() {
+        alert('For security reasons Open Forum is not tracking the changing URL, please copy URL to the Open Forum model to enter the Forum of the page entered.');
+    });
+  }, 3000);
+*/
