@@ -217,7 +217,28 @@ h4 {
     transition: 0.5s;
 
 }
+
 #hideopenforum:hover{
     background-color: #001011;
     color: white;
+}
+
+@media (max-width: 500px){
+    #web{
+        display: none;
+        width: 0px;
+    }
+
+    #chat{
+        height: 100vh;
+        width: 100%;
+    }
+
+    #hideopenforum{
+        height: 100vh;
+    }
+}
+
+@media (min-width: 500px){
+
 }
