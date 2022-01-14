@@ -223,10 +223,6 @@ h4 {
     color: white;
 }
 
-#browser-icon{
-    display: none;
-}
-
 @media (max-width: 500px){
     #web{
         display: none;
@@ -244,5 +240,5 @@ h4 {
 }
 
 @media (min-width: 500px){
-    
+
 }
