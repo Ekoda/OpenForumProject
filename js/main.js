@@ -27,3 +27,11 @@ setTimeout(function() {
     });
   }, 3000);
 */
+
+// Temporary Sign in 
+$('.sign').on("click", function(){
+    $('#signbox').css('display', 'none')
+    $('#info').css('display', 'flex')
+    $('#picture').css('display', 'block')
+
+})
