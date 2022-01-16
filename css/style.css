@@ -261,9 +261,7 @@ h5 {
 .at{
     background-color: #001011;
     border-radius: 1px;
-    padding:1x;
-    padding-right: 4px;
-    padding-left: 4px;
+    padding-right: 2px;
 
 }
 
@@ -342,13 +340,18 @@ h5 {
 .notification{
     display: flex;
     flex-direction: row;
-    padding: 5px;
+    justify-content: center;
+    padding: 7px;
     width: auto;
 }
 
 .notificationtext{
-    margin-left: 5px;
     width:auto;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
 }
 #no-notifications{
     position: absolute;
@@ -357,4 +360,16 @@ h5 {
     font-size: 11px;
     font-family: 'Lato', sans-serif;
     color: #F71735;
+}
+
+.textnotificationbox{
+    padding: 0px;
+    margin: 0px;
+}
+
+.timer{
+    opacity: 0.6;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    margin-left: 5px;
 }
