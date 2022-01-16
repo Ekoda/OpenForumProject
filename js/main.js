@@ -35,3 +35,38 @@ $('.sign').on("click", function(){
     $('#picture').css('display', 'block')
 
 })
+
+// Notification box 
+
+// To stop event from firing when clicking on child 
+$("#notificationbox").click(function(e){
+    e.stopPropagation();
+})
+
+// Toggle notifications
+$('#notification-button').on("click", function(){
+    if($('#notificationbox').css('display') == 'none'){
+        $('#notificationbox').css('display', 'block')
+    } else if ($('#notificationbox').css('display') == 'block'){
+        $('#notificationbox').css('display', 'none')
+    }
+})
+
+//Hide notification box on click outside
+$(document).mouseup(function(e) 
+{
+    let container = $("#notificationbox");
+    
+    if (!container.is(e.target) && container.has(e.target).length === 0) 
+    {
+        container.css('display', 'none');
+    }
+    $('#notification-button').on("click", function(){
+        if($('#notificationbox').css('display') == 'none'){
+            $('#notificationbox').css('display', 'block')
+        } else if ($('#notificationbox').css('display') == 'block'){
+            $('#notificationbox').toggle()
+        }
+    })
+});
+
