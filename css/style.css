@@ -16,6 +16,12 @@ p {
     padding-right: 10px;
     font-size: 14px;
 }
+a {
+    padding: 0;
+    margin-top: 5px;
+    padding-right: 10px;
+    font-size: 14px;
+}
 h4 {
     padding: 0;
     margin: 0;
@@ -39,6 +45,7 @@ h5 {
 #web{
     height: 100vh; 
     width: 80%;
+    z-index: 50;
 }
 
 #chat{
@@ -313,4 +320,41 @@ h5 {
 .sign:active{
     color:#BBBBBB;
     border-color:#BBBBBB;
-}   
+}  
+
+#notification-button{
+    position:relative;
+    cursor: pointer;
+}
+
+#notificationbox{
+    display: none;
+    position: absolute;
+    width: 230px;
+    height: auto;
+    right: 0;
+    background-color: #1F1F1E;
+    border: 1px solid black;
+    border-radius: 2px;
+    z-index: 999;
+}
+
+.notification{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    width: auto;
+}
+
+.notificationtext{
+    margin-left: 5px;
+    width:auto;
+}
+#no-notifications{
+    position: absolute;
+    right: -6px;
+    top: 16px;
+    font-size: 11px;
+    font-family: 'Lato', sans-serif;
+    color: #F71735;
+}
