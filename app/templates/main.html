@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<header>
+    <div id="head"></div>
+</header>
+
+    <div id="main">
+    <object id="web" type="text/html" data="https://www.wikipedia.org/" >   
+    </object>
+    <i class="fas fa-chevron-right" id="hideopenforum"></i>
+
+    <div id="chat">
+      <div id="chathead">
+        <div id="profile">
+
+          <div id="brand"><p>Open Forum</p></div>
+
+          <div id="signbox"> 
+            <a href="#" class="sign">Sign in</a>
+            <a href="#" class="sign">Creat account</a>
+          </div>
+
+          <div id="info">
+
+            <i class="fas fa-globe-europe"></i>
+            <i class="fas fa-envelope"></i>
+            <i class="fas fa-bell" id="notification-button">
+              
+              <div id="no-notifications">2</div>
+
+              <div id="notificationbox">
+
+                {% for notifications in notifications %}
+                <div class="notification">
+                  <img class="responsepic" src="{{ url_for('static', filename='images/profile.jpg') }}">
+                  <div class="textnotificationbox">
+                  <p class="notificationtext"><block class="at">{{ notifications.from.user }}</block> {{ notifications.text }}</p>
+                  <p class="timer">{{ notifications.time }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+
+              </div>
+            </i>
+        
+          </div>
+          <img id="picture" src="{{ url_for('static', filename='images/profile.jpg') }}">
+
+        </div>
+
+        <div id="place">
+          <input id="placebox" type="text" placeholder="https://www.wikipedia.org/">
+        </div>
+      </div>
+
+        <div id="chatarea"> 
+          <div id="comments">
+
+
+            {% for comments in comments %}
+            <div class="comment">
+                <img class="userpic" src="{{ url_for('static', filename='images/profile.jpg') }}">
+                <div class="text-box">
+                <h4>{{ comments.author.username }}</h4>
+                <p>{{ comments.comment }}</p>
+                <div class="comment-interact">
+                    <p class="numbers">{{ comments.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">{{ comments.time }}</p> <p class="respond">Respond</p>
+                </div>
+
+                {% if comments.response %}
+                <div class="response-box">
+                    <img class="responsepic" src="{{ url_for('static', filename='images/profile.jpg') }}">
+                    <div class="response-text"> 
+                        <h5>{{ comments.response.username }}</h5>
+                        <p><block class="at">{{ comments.response.respondto }}</block> {{ comments.response.comment }}</p>
+                        <div class="comment-interact">
+                        <p class="numbers">{{ comments.response.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i> <p class="timer">{{ comments.response.time }}</p> <p class="respond">Respond</p>
+                        
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+  </div>
+
+  </div>
+
+{% endblock %}

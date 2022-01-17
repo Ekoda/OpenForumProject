@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wikichat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/d33b3bc28b.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+    <header>
+        <div id="head"></div>
+    </header>
+
+        <div id="main">
+        <object id="web" type="text/html" data="https://www.wikipedia.org/" >   
+        </object>
+        <i class="fas fa-chevron-right" id="hideopenforum"></i>
+
+        <div id="chat">
+          <div id="chathead">
+            <div id="profile">
+
+              <div id="brand"><p>Open Forum</p></div>
+
+              <div id="signbox"> 
+                <a href="#" class="sign">Sign in</a>
+                <a href="#" class="sign">Creat account</a>
+              </div>
+
+              <div id="info">
+    
+                <i class="fas fa-globe-europe"></i>
+                <i class="fas fa-envelope"></i>
+                <i class="fas fa-bell" id="notification-button">
+                  
+                  <div id="no-notifications">2</div>
+
+                  <div id="notificationbox">
+
+                    <div class="notification">
+                      <img class="responsepic" src="images/profile.jpg">
+                      <div class="textnotificationbox">
+                      <p class="notificationtext"><block class="at">PontusBlomqvist</block> has responded to your comment X</p>
+                      <p class="timer">1 week ago</p>
+                      </div>
+                    </div>
+
+                    <div class="notification">
+                      <img class="responsepic" src="images/user1.jpg">
+                      <div class="notificationtext">
+                      <p class="notificationtext"><block class="at">EliškaRychetská</block> has responded to your comment X</p>
+                      <p class="timer">1 week ago</p>
+                      </div>
+                    </div>
+        
+                  </div>
+                </i>
+            
+              </div>
+              <img id="picture" src="images/profile.jpg">
+
+            </div>
+
+            <div id="place">
+              <input id="placebox" type="text" placeholder="https://www.wikipedia.org/">
+            </div>
+          </div>
+
+            <div id="chatarea"> 
+              <div id="comments">
+
+                <div class="comment">
+                  <img class="userpic" src="images/profile.jpg">
+                  <div class="text-box">
+                    <textarea id="poster" placeholder="Comment..."></textarea>
+                    <p class="respond" id="comment">Comment</p>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <! –– FAKE USER COMMENTS START HERE ––>
+                <div class="comment">
+                  <img class="userpic" src="images/user1.jpg">
+                  <div class="text-box">
+                    <h4 style="color: #ED1D62">Eliška Rychetská</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <div class="comment-interact">
+                      <p class="numbers">2724</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">1 week ago</p> <p class="respond">Respond</p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <! –– Example, comment with response ––>
+                <div class="comment">
+                  <img class="userpic" src="images/profile.jpg">
+                  <div class="text-box">
+                    <h4 style="color: #C7EA46">Pontus Blomqvist</h4>
+                    <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</p>
+                    <div class="comment-interact">
+                      <p class="numbers">-5235</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">1 day ago</p> <p class="respond">Respond</p>
+                      
+                    </div>
+                    
+                    <div class="response-box">
+                    <img class="responsepic" src="images/user1.jpg">
+                      <div class="response-text"> 
+                        <h5>Eliška Rychetská</h5>
+                        <p><block class="at">@PontusBlomqvist</block> Aboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <div class="comment-interact">
+                          <p class="numbers">36</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i> <p class="timer">2 hours ago</p> <p class="respond">Respond</p>
+                          
+                        </div>
+                      </div>
+                   </div>
+                   
+                     
+                  </div>
+                </div>
+                <! –– Example, comment with response END ––>
+
+                <div class="comment">
+                  <img class="userpic" src="images/user3.png">
+                  <div class="text-box">
+                    <h4 style="color: #624aa1">Noam Chomsky</h4>
+                    <p>Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et</p>
+                    <div class="comment-interact">
+                      <p class="numbers">7</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">21 minutes ago</p> <p class="respond">Respond</p>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <! –– FAKE USER COMMENTS ENDS HERE ––>
+                
+              </div>
+
+
+          </div>
+        </div>
+
+        </div>
+
+
+
+	<script src="js/main.js"></script>
+  </body>
+</html>
