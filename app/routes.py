@@ -4,7 +4,6 @@ from app import app
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'username': 'Pontus Blomqvist'}
     notifications = [
         {
         'from': {'user': 'Pontus Blomqvist'},
@@ -19,8 +18,21 @@ def index():
         'time': '1 week ago',
         'image': 'images/user1.jpg',
         'color': 'color: #bf279b;'
+        },
+        {
+        'from': {'user': 'Noam Chomsky'},
+        'text': 'has responded to your comment X',
+        'time': '2 week ago',
+        'image': 'images/user3.png',
+        'color': 'color: #e67600;'
         }
     ]
+
+    user = {
+        'username': 'Pontus Blomqvist',
+        'numberofnotifications': len(notifications)
+        }
+
     comments = [
         {
             'author': {'username': 'Eliška Rychetská'},
