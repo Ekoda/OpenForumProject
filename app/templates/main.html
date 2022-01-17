@@ -34,9 +34,9 @@
 
                 {% for notifications in notifications %}
                 <div class="notification">
-                  <img class="responsepic" src="{{ url_for('static', filename='images/profile.jpg') }}">
+                  <img class="responsepic" src="{{ url_for('static', filename=notifications.image) }}">
                   <div class="textnotificationbox">
-                  <p class="notificationtext"><block class="at">{{ notifications.from.user }}</block> {{ notifications.text }}</p>
+                  <p class="notificationtext"><block class="at" style="{{ notifications.color }}">{{ notifications.from.user }}</block> {{ notifications.text }}</p>
                   <p class="timer">{{ notifications.time }}</p>
                   </div>
                 </div>
@@ -61,9 +61,9 @@
 
             {% for comments in comments %}
             <div class="comment">
-                <img class="userpic" src="{{ url_for('static', filename='images/profile.jpg') }}">
+                <img class="userpic" src="{{ url_for('static', filename=comments.image) }}">
                 <div class="text-box">
-                <h4>{{ comments.author.username }}</h4>
+                <h4 style="{{ comments.color }}">{{ comments.author.username }}</h4>
                 <p>{{ comments.comment }}</p>
                 <div class="comment-interact">
                     <p class="numbers">{{ comments.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">{{ comments.time }}</p> <p class="respond">Respond</p>
@@ -71,9 +71,9 @@
 
                 {% if comments.response %}
                 <div class="response-box">
-                    <img class="responsepic" src="{{ url_for('static', filename='images/profile.jpg') }}">
+                    <img class="responsepic" src="{{ url_for('static', filename=comments.image) }}">
                     <div class="response-text"> 
-                        <h5>{{ comments.response.username }}</h5>
+                        <h5 style="{{ comments.response.color }}">{{ comments.response.username }}</h5>
                         <p><block class="at">{{ comments.response.respondto }}</block> {{ comments.response.comment }}</p>
                         <div class="comment-interact">
                         <p class="numbers">{{ comments.response.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i> <p class="timer">{{ comments.response.time }}</p> <p class="respond">Respond</p>
