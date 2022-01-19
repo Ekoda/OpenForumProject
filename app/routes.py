@@ -55,11 +55,12 @@ def index():
                 'username': 'Eliška Rychetská',
                 'image': 'images/user1.jpg',
                 'color': 'color: #bf279b;',
-                'respondto' : 'PontusBlomqvist',
-                'comment': 'Aboris nisi ut aliquip ex ea commodo consequat.'},
-                'score': '36',
+                'respondto': 'PontusBlomqvist',
+                'comment': 'Aboris nisi ut aliquip ex ea commodo consequat.',
+                'score': '32',
                 'time': '2 hours ago',
                 'commentID': '3'
+                }
         },
         {
             'author': {'username': 'Noam Chomsky'},

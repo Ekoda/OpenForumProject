@@ -87,13 +87,12 @@ $('#replybuttonIDx').click(function(){
     }
 })
 
-$('.respond').click(function(e){
-    let status = $(this).attr('id');
-    console.log(status)
-    $('#replyinputID' + status).css('display', 'block');
-    if($('#replyinputID' + status).val()){
+$('.respond').click(function(){
+    let commentID = $(this).attr('id');
+    $('#replyinputID' + commentID).css('display', 'block');
+    if($('#replyinputID' + commentID).val()){
         // SEND REPLY HERE
-        $('#replyinputID' + status).css('display', 'none');
-        $('#replyinputID' + status).val('')
+        $('#replyinputID' + commentID).css('display', 'none');
+        $('#replyinputID' + commentID).val('')
     }
 })

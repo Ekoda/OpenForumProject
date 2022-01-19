@@ -74,7 +74,7 @@
                 <p>{{ comments.comment }}</p>
                 <textarea class="responseinput" id="replyinputID{{comments.commentID}}" type="text" placeholder="Respond..."></textarea>
                 <div class="comment-interact">
-                    <p class="numbers">{{ comments.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">{{ comments.time }}</p> <p id="{{comments.commentID}}" class="respond">Respond</p>
+                    <p class="numbers">{{ comments.score }}</p><i class="fas fa-light fa-chevron-up"></i> <i class="fas fa-light fa-chevron-down"></i><p class="timer">{{ comments.time }}</p> <p id="{{comments.commentID}}" class="respond">Respond</p>
                 </div>
 
                 {% if comments.response %}
@@ -85,7 +85,7 @@
                         <p><block class="at username">{{ comments.response.respondto }}</block> {{ comments.response.comment }}</p>
                         <textarea class="responseinput" id="replyinputID{{comments.response.commentID}}" type="text" placeholder="Respond..."></textarea>
                         <div class="comment-interact">
-                        <p class="numbers">{{ comments.response.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i> <p class="timer">{{ comments.response.time }}</p> <p id="{{comments.response.commentID}}" class="respond">Respond</p>
+                        <p class="numbers">{{ comments.response.score }}</p><i class="fas fa-light fa-chevron-up"></i> <i class="fas fa-light fa-chevron-down"></i> <p class="timer">{{ comments.response.time }}</p> <p id="{{comments.response.commentID}}" class="respond">Respond</p>
                         
                         </div>
                     </div>
