@@ -70,3 +70,30 @@ $(document).mouseup(function(e)
     })
 });
 
+//Scales text area with increasing text
+$("textarea").keyup(function(e) {
+    while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+        $(this).height($(this).height()+1);
+    };
+});
+
+// Show input field on press and send & hide if containing value
+$('#replybuttonIDx').click(function(){
+    $('#replyinputIDx').css('display', 'block');
+    if($('#replyinputIDx').val()){
+        // SEND REPLY HERE
+        $('#replyinputIDx').css('display', 'none');
+        $('#replyinputIDx').val('')
+    }
+})
+
+$('.respond').click(function(e){
+    let status = $(this).attr('id');
+    console.log(status)
+    $('#replyinputID' + status).css('display', 'block');
+    if($('#replyinputID' + status).val()){
+        // SEND REPLY HERE
+        $('#replyinputID' + status).css('display', 'none');
+        $('#replyinputID' + status).val('')
+    }
+})

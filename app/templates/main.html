@@ -63,20 +63,22 @@
             <div class="comment">
                 <img class="userpic" src="{{ url_for('static', filename=comments.image) }}">
                 <div class="text-box">
-                <h4 style="{{ comments.color }}">{{ comments.author.username }}</h4>
+                <h4 class="username" style="{{ comments.color }}">{{ comments.author.username }}</h4>
                 <p>{{ comments.comment }}</p>
+                <textarea class="responseinput" id="replyinputID{{comments.commentID}}" type="text" placeholder="Respond..."></textarea>
                 <div class="comment-interact">
-                    <p class="numbers">{{ comments.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">{{ comments.time }}</p> <p class="respond">Respond</p>
+                    <p class="numbers">{{ comments.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i><p class="timer">{{ comments.time }}</p> <p id="{{comments.commentID}}" class="respond">Respond</p>
                 </div>
 
                 {% if comments.response %}
                 <div class="response-box">
                     <img class="responsepic" src="{{ url_for('static', filename=comments.image) }}">
                     <div class="response-text"> 
-                        <h5 style="{{ comments.response.color }}">{{ comments.response.username }}</h5>
-                        <p><block class="at">{{ comments.response.respondto }}</block> {{ comments.response.comment }}</p>
+                        <h5 class="username" style="{{ comments.response.color }}">{{ comments.response.username }}</h5>
+                        <p><block class="at username">{{ comments.response.respondto }}</block> {{ comments.response.comment }}</p>
+                        <textarea class="responseinput" id="replyinputID{{comments.response.commentID}}" type="text" placeholder="Respond..."></textarea>
                         <div class="comment-interact">
-                        <p class="numbers">{{ comments.response.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i> <p class="timer">{{ comments.response.time }}</p> <p class="respond">Respond</p>
+                        <p class="numbers">{{ comments.response.score }}</p><i class="fas fa-light fa-chevron-up"> <i class="fas fa-light fa-chevron-down"></i></i> <p class="timer">{{ comments.response.time }}</p> <p id="{{comments.response.commentID}}" class="respond">Respond</p>
                         
                         </div>
                     </div>
