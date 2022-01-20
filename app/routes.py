@@ -73,3 +73,8 @@ def index():
         }
     ]
     return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications)
+
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html', title='Sign up')
