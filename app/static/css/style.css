@@ -410,18 +410,58 @@ h5 {
     opacity: 1;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 #signupcontainer{
     width: 100vw;
     height: 100vh;
     background-color: #1F1F1E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     
 }
 
 #signupbox{
+    padding: 10px;
+    margin: 10px;
     width: 600px;
     height: auto;
     background-color: #343432;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
 
+}
+
+#YYYYMMDD{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    outline: none;
+    padding: 10px;
+}
+
+.birthdate{
+    width: 20%;
+}
+
+#createacctext{
+    padding-bottom: 20px;
+    color: white;
 }
