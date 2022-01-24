@@ -29,8 +29,8 @@ setTimeout(function() {
 */
 
 // Temporary Sign in 
-$('.sign').on("click", function(){
-    $('#signbox').css('display', 'none')
+$('#signin').on("click", function(){
+    $('.sign').css('display', 'none')
     $('#info').css('display', 'flex')
     $('#picture').css('display', 'block')
 

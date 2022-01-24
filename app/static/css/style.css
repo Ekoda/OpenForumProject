@@ -424,14 +424,17 @@ input[type=number] {
 
 
 #signupcontainer{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    position: fixed;
     background-color: #1F1F1E;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-family: 'Lato', sans-serif;
+
     
 }
 
@@ -444,6 +447,7 @@ input[type=number] {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 10px;
     border-radius: 10px;
 
@@ -458,10 +462,18 @@ input[type=number] {
 }
 
 .birthdate{
-    width: 20%;
+    width: 30%;
 }
 
 #createacctext{
     padding-bottom: 20px;
     color: white;
+}
+
+.signupinput{
+    width: 50%;
+}
+
+#signupacc{
+    width: 30%;
 }
