@@ -30,9 +30,16 @@ setTimeout(function() {
 
 // Temporary Sign in 
 $('#signin').on("click", function(){
+    $('#sign_in_container').css('display', 'flex')
+    $('.sign').css('display', 'none')
+    $('#main_signin_button').css('display', 'block')    
+
+    /* This is what should be triggered when logged in
+    
     $('.sign').css('display', 'none')
     $('#info').css('display', 'flex')
     $('#picture').css('display', 'block')
+    */
 
 })
 
