@@ -499,8 +499,9 @@ input[type=number] {
 }
 
 #main_signin_button{
-    width: 80px;
+    width: 85px;
     text-align: center;
     padding-left: 3px;
     padding-right: 3px;
+    margin: auto;
 }
