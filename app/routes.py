@@ -1,5 +1,6 @@
 from flask import render_template
 from app import app
+from app.forms import LoginForm
 
 @app.route('/')
 @app.route('/index')
@@ -72,7 +73,10 @@ def index():
             'commentID': '4'
         }
     ]
-    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications)
+
+    form = LoginForm()
+
+    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form)
 
 
 @app.route('/signup')

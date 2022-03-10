@@ -23,11 +23,18 @@
           </div>
 
           <div id="sign_in_container">
+            
             <div id="sign_in_field_box" >
-              <input class="main_signin" id="sign_in_email" type=email placeholder="Email">
-              <input class="main_signin" id="sign_in_password" type=password placeholder="Password">
+              <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                {{ form.username(size=32,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
+                {{ form.password(size=32, class="main_signin", id="sign_in_password", type=password, placeholder="Password") }}
+              </form>
             </div>
-            <a href="#" class="sign" id="main_signin_button">Sign in</a>
+            <form action="" method="post" novalidate>
+            <a href="#" class="sign" id="main_signin_button">{{ form.submit() }}</a>
+            </form>
+            
           </div>
 
           <div id="info">
