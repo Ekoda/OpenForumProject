@@ -27,12 +27,12 @@
             <div id="sign_in_field_box" >
               <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
-                {{ form.username(size=32,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
-                {{ form.password(size=32, class="main_signin", id="sign_in_password", type=password, placeholder="Password") }}
+                {{ form.email(size=32,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
+                {{ form.password(size=32, class="main_signin", id="sign_in_password", placeholder="Password") }}
               </form>
             </div>
             <form action="" method="post" novalidate>
-            <a href="#" class="sign" id="main_signin_button">{{ form.submit() }}</a>
+              {{ form.submit(class="sign", id="main_signin_button") }}</a>
             </form>
             
           </div>

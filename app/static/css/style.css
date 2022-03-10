@@ -496,17 +496,20 @@ input[type=number] {
     background-color: white;
     opacity: 0.6;
     border: none;
-    width: 200px;
+    width: 190px;
+    margin-right: 5px;
 }
 .main_signin:focus{
     opacity: 1;
 }
 
 #main_signin_button{
-    width: 85px;
+    width: 80px;
     text-align: center;
     padding-left: 3px;
     padding-right: 3px;
     margin: auto;
     margin-right: 5px;
+    background-color: transparent;
+    cursor: pointer;
 }
