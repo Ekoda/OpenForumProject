@@ -22,6 +22,21 @@
             <a href="/signup" class="sign">Create account</a>
           </div>
 
+          <div id="sign_in_container">
+            
+            <div id="sign_in_field_box" >
+              <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                {{ form.email(size=32,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
+                {{ form.password(size=32, class="main_signin", id="sign_in_password", placeholder="Password") }}
+              </form>
+            </div>
+            <form action="" method="post" novalidate>
+              {{ form.submit(class="sign", id="main_signin_button") }}</a>
+            </form>
+            
+          </div>
+
           <div id="info">
 
             <i class="fas fa-globe-europe"></i>

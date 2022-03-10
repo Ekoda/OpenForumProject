@@ -1,8 +1,9 @@
-from flask import render_template
+from flask import render_template, flash, redirect
 from app import app
+from app.forms import LoginForm
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     notifications = [
         {
@@ -72,7 +73,14 @@ def index():
             'commentID': '4'
         }
     ]
-    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications)
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}'.format(
+            form.username.data, form.remember_me.data))
+        return redirect('/index')
+
+    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form)
 
 
 @app.route('/signup')

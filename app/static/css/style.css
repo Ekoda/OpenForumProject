@@ -477,3 +477,39 @@ input[type=number] {
 #signupacc{
     width: 30%;
 }
+
+#sign_in_container{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    width: 300px;
+}
+
+#sign_in_field_box{
+    width: 100%;
+}
+
+.main_signin{ 
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    background-color: white;
+    opacity: 0.6;
+    border: none;
+    width: 190px;
+    margin-right: 5px;
+}
+.main_signin:focus{
+    opacity: 1;
+}
+
+#main_signin_button{
+    width: 80px;
+    text-align: center;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin: auto;
+    margin-right: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
