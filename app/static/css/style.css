@@ -80,7 +80,7 @@ h5 {
 #info{
     height: 100%;
     width: 40%;
-    display: none;
+    display: flex;
     justify-content: right;
     align-items: center;
     padding-right: 15px;
@@ -92,7 +92,7 @@ h5 {
     border: solid 1px black;
     border-radius: 50%;
     margin-right: 5px;
-    display: none;
+    display: block;
     cursor: pointer;
 }
 
@@ -513,3 +513,5 @@ input[type=number] {
     background-color: transparent;
     cursor: pointer;
 }
+
+   

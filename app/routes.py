@@ -7,7 +7,7 @@ from app.models import User
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    authenticated = current_user.is_authenticated # Return to this solution
+    authenticated = current_user.is_authenticated # This is passed to the template; conditions dictate which divs show
 
     notifications = [
         {
