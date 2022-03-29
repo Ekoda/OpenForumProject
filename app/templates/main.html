@@ -30,10 +30,8 @@
                 {{ form.hidden_tag() }}
                 {{ form.email(size=32,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
                 {{ form.password(size=32, class="main_signin", id="sign_in_password", placeholder="Password") }}
-              </form>
             </div>
-            <form action="" method="post" novalidate>
-              {{ form.submit(class="sign", id="main_signin_button") }}</a>
+                {{ form.submit(class="sign", id="main_signin_button") }}
             </form>
             
           </div>

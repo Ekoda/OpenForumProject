@@ -4,6 +4,7 @@ from app.forms import LoginForm
 from flask_login import current_user, login_user, logout_user
 from app.models import User
 
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
@@ -82,10 +83,10 @@ def index():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid email or password')
+            flash('Invalid username or password')
             return redirect(url_for('index'))
-        login_user(user)
-        return redirect(url_for('index'))
+        login_user(user, remember=True)
+        return redirect('index')
 
     return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form, authenticated=authenticated)
 
