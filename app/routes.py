@@ -1,10 +1,14 @@
 from flask import render_template, flash, redirect
 from app import app
 from app.forms import LoginForm
+from flask_login import current_user, login_user
+from app.models import User
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    authenticated = current_user.is_authenticated # Return to this solution
+
     notifications = [
         {
         'from': {'user': 'Pontus Blomqvist'},
