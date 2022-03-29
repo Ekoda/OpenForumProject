@@ -379,6 +379,10 @@ h5 {
     font-size: 11px;
     font-family: 'Lato', sans-serif;
     color: #F71735;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .textnotificationbox{
