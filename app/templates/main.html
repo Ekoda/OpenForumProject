@@ -17,6 +17,7 @@
 
           <div id="brand"><p>Open Forum</p></div>
 
+          {% if not authenticated %}
           <div id="signbox"> 
             <a href="#" class="sign" id="signin">Sign in</a>
             <a href="/signup" class="sign">Create account</a>
@@ -29,14 +30,14 @@
                 {{ form.hidden_tag() }}
                 {{ form.email(size=32,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
                 {{ form.password(size=32, class="main_signin", id="sign_in_password", placeholder="Password") }}
-              </form>
             </div>
-            <form action="" method="post" novalidate>
-              {{ form.submit(class="sign", id="main_signin_button") }}</a>
+                {{ form.submit(class="sign", id="main_signin_button") }}
             </form>
             
           </div>
+          {% endif %}
 
+          {% if authenticated %}
           <div id="info">
 
             <i class="fas fa-globe-europe"></i>
@@ -61,7 +62,9 @@
             </i>
         
           </div>
+          
           <img id="picture" src="{{ url_for('static', filename='images/profile.jpg') }}">
+          {% endif %}
 
         </div>
 

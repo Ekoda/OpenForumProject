@@ -1,10 +1,15 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for, request
 from app import app
 from app.forms import LoginForm
+from flask_login import current_user, login_user, logout_user
+from app.models import User
+
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    authenticated = current_user.is_authenticated # This is passed to the template; conditions dictate which divs show
+
     notifications = [
         {
         'from': {'user': 'Pontus Blomqvist'},
@@ -76,13 +81,21 @@ def index():
 
     form = LoginForm()
     if form.validate_on_submit():
-        flash('Login requested for user {}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect('/index')
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('index'))
+        login_user(user, remember=True)
+        return redirect('index')
 
-    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form)
+    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form, authenticated=authenticated)
 
 
 @app.route('/signup')
 def signup():
     return render_template('signup.html', title='Sign up')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
