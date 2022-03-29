@@ -84,7 +84,7 @@ def index():
             form.username.data, form.remember_me.data))
         return redirect('/index')
 
-    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form)
+    return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form, authenticated=authenticated)
 
 
 @app.route('/signup')

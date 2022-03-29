@@ -17,6 +17,7 @@
 
           <div id="brand"><p>Open Forum</p></div>
 
+          {% if not authenticated %}
           <div id="signbox"> 
             <a href="#" class="sign" id="signin">Sign in</a>
             <a href="/signup" class="sign">Create account</a>
@@ -36,7 +37,9 @@
             </form>
             
           </div>
+          {% endif %}
 
+          {% if authenticated %}
           <div id="info">
 
             <i class="fas fa-globe-europe"></i>
@@ -61,7 +64,9 @@
             </i>
         
           </div>
+          
           <img id="picture" src="{{ url_for('static', filename='images/profile.jpg') }}">
+          {% endif %}
 
         </div>
 
