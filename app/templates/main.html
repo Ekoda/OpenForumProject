@@ -28,7 +28,7 @@
             <div id="sign_in_field_box" >
               <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
-                {{ form.email(size=32,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
+                {{ form.email(size=120,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
                 {{ form.password(size=32, class="main_signin", id="sign_in_password", placeholder="Password") }}
             </div>
                 {{ form.submit(class="sign", id="main_signin_button") }}
