@@ -19,6 +19,26 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def to_dict(self, include_email=False):
+        data = {
+            'id' : self.id,
+            'username': self.username,
+            'image': self.image,
+            'color': self.color
+        }
+        if include_email:
+            data['email'] = self.email
+
+        return data
+
+    def from_dict(self, data, new_user=False):
+        for field in ['username', 'email', 'color', 'image']:
+            if field in data:
+                setattr(self, field, data[field])
+        if new_user and 'password' in data:
+            self.set_password(data['password'])
+    
+
     def __repr__(self):
         return '<User{}>'.format(self.username)
 
