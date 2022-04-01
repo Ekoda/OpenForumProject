@@ -57,7 +57,7 @@ def index():
             'score': '-5235',
             'time': '1 day ago',
             'commentID': '2',
-            'response': {
+            'responses': [{
                 'username': 'Eliška Rychetská',
                 'image': 'images/user1.jpg',
                 'color': 'color: #bf279b;',
@@ -66,7 +66,7 @@ def index():
                 'score': '32',
                 'time': '2 hours ago',
                 'commentID': '3'
-                }
+                }]
         },
         {
             'author': {'username': 'Noam Chomsky'},
