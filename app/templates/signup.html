@@ -5,15 +5,13 @@
 <div id="signupcontainer">
     <div id="signupbox">
         <h4 id="createacctext">Create your Open Forum account</h4>
-        <input class="signupinput" type=email placeholder="Email">
-        <input class="signupinput" type=password placeholder="Password">
-        <div id="YYYYMMDD">
-            <input type="number" min="1900" max="2099" step="1" value="YYYY" placeholder="YYYY" class="birthdate" />
-            <input type="number" min="1" max="12" step="1" value="MM" placeholder="MM" class="birthdate"/>
-            <input type="number" min="1" max="31" step="1" value="DD" placeholder="DD" class="birthdate"/>
-        </div>
-        <a href="#" class="sign" id="signupacc">Create account</a>
+        <input id="create_acc_email" class="signupinput" type="email" placeholder="Email">
+        <input id="create_acc_username" class="signupinput" type="text" placeholder="Username" autocomplete="new-username">
+        <input id="create_acc_password" class="signupinput" type="password" placeholder="Password" autocomplete="new-password">
+        <input id="create_acc_repeat_password" class="signupinput" type="password" placeholder="Repeat Password" autocomplete="new-password">
+        <a class="sign" id="create_acc">Create account</a>
     </div>
 </div>
 
+<script src="{{ url_for('static',filename='js/signup.js') }}"></script>
 {% endblock %}
