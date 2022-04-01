@@ -454,20 +454,8 @@ input[type=number] {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
 
-}
-
-#YYYYMMDD{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    outline: none;
-    padding: 10px;
-}
-
-.birthdate{
-    width: 30%;
 }
 
 #createacctext{
@@ -477,10 +465,13 @@ input[type=number] {
 
 .signupinput{
     width: 50%;
+    border: none;
+    margin: 1px;
 }
 
-#signupacc{
+#create_acc{
     width: 30%;
+    margin: 5px;
 }
 
 #sign_in_container{
