@@ -95,20 +95,20 @@
                     <p class="numbers">{{ comments.score }}</p><i class="fas fa-light fa-chevron-up"></i> <i class="fas fa-light fa-chevron-down"></i><p class="timer">{{ comments.time }}</p> <p id="{{comments.commentID}}" class="respond">Respond</p>
                 </div>
 
-                {% if comments.response %}
+                {% for response in comments.responses %}
                 <div class="response-box">
                     <img class="responsepic" src="{{ url_for('static', filename=comments.image) }}">
                     <div class="response-text"> 
-                        <h5 class="username" style="{{ comments.response.color }}">{{ comments.response.username }}</h5>
-                        <p><block class="at username">{{ comments.response.respondto }}</block> {{ comments.response.comment }}</p>
-                        <textarea class="responseinput" id="replyinputID{{comments.response.commentID}}" type="text" placeholder="Respond..."></textarea>
+                        <h5 class="username" style="{{ response.color }}">{{ response.username }}</h5>
+                        <p><block class="at username">{{ response.respondto }}</block> {{ response.comment }}</p>
+                        <textarea class="responseinput" id="replyinputID{{response.commentID}}" type="text" placeholder="Respond..."></textarea>
                         <div class="comment-interact">
-                        <p class="numbers">{{ comments.response.score }}</p><i class="fas fa-light fa-chevron-up"></i> <i class="fas fa-light fa-chevron-down"></i> <p class="timer">{{ comments.response.time }}</p> <p id="{{comments.response.commentID}}" class="respond">Respond</p>
+                        <p class="numbers">{{ response.score }}</p><i class="fas fa-light fa-chevron-up"></i> <i class="fas fa-light fa-chevron-down"></i> <p class="timer">{{ response.time }}</p> <p id="{{response.commentID}}" class="respond">Respond</p>
                         
                         </div>
                     </div>
                 </div>
-                {% endif %}
+                {% endfor %}
                 
                 </div>
             </div>

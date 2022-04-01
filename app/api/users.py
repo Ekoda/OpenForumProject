@@ -6,3 +6,7 @@ from app.models import User
 def get_user(id):
     data = User.query.get_or_404(id).to_dict()
     return jsonify(data)
+    
+@app.route('/api/users', methods=['POST'])
+def create_user():
+    pass
