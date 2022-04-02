@@ -439,6 +439,7 @@ input[type=number] {
     justify-content: center;
     text-align: center;
     font-family: 'Lato', sans-serif;
+    
 
     
 }
@@ -455,6 +456,7 @@ input[type=number] {
     align-items: center;
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 20%;
 
 }
 
