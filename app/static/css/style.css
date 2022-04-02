@@ -510,6 +510,20 @@ input[type=number] {
     margin-right: 5px;
     background-color: transparent;
     cursor: pointer;
+    height:19px;
+    padding-top: 0.1em;
+    margin-bottom: -0.1em;
+    
 }
 
-   
+#forgot_password{
+    font-size: 9px;
+    font-family: 'Lato', sans-serif;
+    color:white;
+    text-decoration: none;
+    
+}
+
+#submit_button_box{
+    text-align: center;
+}

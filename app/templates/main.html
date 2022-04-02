@@ -31,7 +31,10 @@
                 {{ form.email(size=120,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
                 {{ form.password(size=32, class="main_signin", id="sign_in_password", placeholder="Password") }}
             </div>
+              <div id="submit_button_box">
                 {{ form.submit(class="sign", id="main_signin_button") }}
+                <a href="#signin" id="forgot_password">Forgot password?</a>
+              </div>
             </form>
             
           </div>
