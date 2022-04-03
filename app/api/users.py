@@ -39,7 +39,7 @@ def api_reset_password():
     response.status_code = 201
     return response
 
-@app.route('/api/create_password', methods=['POST'])
+@app.route('/api/create_password', methods=['PUT'])
 def create_a_new_password():
     data = request.get_json() or {}
     if 'token' not in data:
@@ -52,5 +52,5 @@ def create_a_new_password():
     user.user.set_password(data['password'])
     db.session.commit()
     response = jsonify('Successfully changed password')
-    response.status_code = 201
+    response.status_code = 200
     return response

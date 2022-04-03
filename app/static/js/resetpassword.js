@@ -30,7 +30,7 @@ $('#final_reset_password').click(function(){
         "password": password_one}
 
     $.ajax({
-        type: "POST",
+        type: "PUT",
         url: api_url,
         data: JSON.stringify(data),
         contentType : 'application/json',
