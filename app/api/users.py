@@ -39,8 +39,8 @@ def api_reset_password():
     response.status_code = 201
     return response
 
-@app.route('/api/finalresetpassword', methods=['POST'])
-def api_final_reset_password():
+@app.route('/api/create_password', methods=['POST'])
+def create_a_new_password():
     data = request.get_json() or {}
     if 'token' not in data:
         return bad_request('must include token')

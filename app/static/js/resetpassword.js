@@ -1,7 +1,8 @@
 $('#reset_password').click(function(){
     let email = $("#reset_password_email").val()
     let api_url = window.location.origin + "/api/resetpassword";
-    let data = {"email": email}
+    let data = {
+        "email": email}
 
     $.ajax({
         type: "POST",
@@ -23,8 +24,10 @@ $('#final_reset_password').click(function(){
     if (password_one !== password_two){
         return alert("Please make sure your passwords match")
     }
-    let api_url = window.location.origin + "/api/finalresetpassword";
-    let data = {"token": token, "password": password_one}
+    let api_url = window.location.origin + "/api/create_password";
+    let data = {
+        "token": token,
+        "password": password_one}
 
     $.ajax({
         type: "POST",
