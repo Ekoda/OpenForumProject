@@ -109,7 +109,7 @@ def resetpassword():
 
 # Route from reset password email token
 @app.route('/create_password/<token>', methods=['GET'])
-def reset_password(token):
+def create_password(token):
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     user = User.verify_reset_password_token(token)
