@@ -27,7 +27,7 @@ def create_user():
     return response
 
 @app.route('/api/resetpassword', methods=['POST'])
-def reset_password():
+def api_reset_password():
     data = request.get_json() or {}
     if 'email' not in data:
         return bad_request('must include email')
@@ -36,5 +36,21 @@ def reset_password():
     user = User.query.filter_by(email=data['email']).first()
     send_password_reset_email(user)
     response = jsonify('Successfully reset password, check email for instructions')
+    response.status_code = 201
+    return response
+
+@app.route('/api/finalresetpassword', methods=['POST'])
+def api_final_reset_password():
+    data = request.get_json() or {}
+    if 'token' not in data:
+        return bad_request('must include token')
+    if 'password' not in data:
+        return bad_request('must include password')
+    user = User.verify_reset_password_token(data['token'])
+    if not user:
+        return bad_request('invalid token')
+    user.user.set_password(data['password'])
+    db.session.commit()
+    response = jsonify('Successfully changed password')
     response.status_code = 201
     return response

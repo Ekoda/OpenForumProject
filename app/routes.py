@@ -100,9 +100,19 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+# Route for initial forgot password page
 @app.route('/resetpassword', methods=['GET'])
 def resetpassword():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    
-    return render_template('resetpassword.html', title='Reset Password')
+    return render_template('resetpassword.html', title='Request Reset Password')
+
+# Route from reset password email token
+@app.route('/reset_password/<token>', methods=['GET'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    return render_template('reset_password.html', title='Reset Password')
