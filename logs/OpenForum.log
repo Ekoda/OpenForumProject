@@ -1,0 +1,30 @@
+2022-04-04 00:48:39,171 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:48]
+2022-04-04 00:52:45,229 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:48]
+2022-04-04 00:54:23,168 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:48]
+2022-04-04 00:54:27,156 ERROR: Exception on /api/create_password [PUT] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/api/users.py", line 52, in create_a_new_password
+    user.user.set_password(data['password'])
+AttributeError: 'User' object has no attribute 'user'
+2022-04-04 00:54:33,619 ERROR: Exception on /api/create_password [PUT] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/api/users.py", line 52, in create_a_new_password
+    user.user.set_password(data['password'])
+AttributeError: 'User' object has no attribute 'user'
+2022-04-04 00:55:09,469 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:48]
