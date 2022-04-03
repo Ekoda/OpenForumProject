@@ -15,7 +15,7 @@ $('#reset_password').click(function(){
       });
     })
 
-$('#reset_password').click(function(){
+$('#final_reset_password').click(function(){
     const segments = new URL(href).pathname.split('/');
     const token = segments.pop() || segments.pop();
     let password_one = $("#reset_acc_password").val()
