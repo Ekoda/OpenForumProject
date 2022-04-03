@@ -2,6 +2,7 @@ from app import app, db
 from flask import jsonify, request
 from app.models import User
 from app.api.errors import bad_request
+from app.email import send_password_reset_email
 
 @app.route('/api/users/<int:id>', methods=['GET'])
 def get_user(id):
@@ -22,5 +23,18 @@ def create_user():
     db.session.add(user)
     db.session.commit()
     response = jsonify(user.to_dict())
+    response.status_code = 201
+    return response
+
+@app.route('/api/resetpassword', methods=['POST'])
+def reset_password():
+    data = request.get_json() or {}
+    if 'email' not in data:
+        return bad_request('must include email')
+    if not User.query.filter_by(email=data['email']).first():
+        return bad_request('there is no Open Forum account with that email adress')
+    user = User.query.filter_by(email=data['email']).first()
+    send_password_reset_email(user)
+    response = jsonify('Successfully reset password, check email for instructions')
     response.status_code = 201
     return response

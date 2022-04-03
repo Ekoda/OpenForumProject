@@ -332,6 +332,7 @@ h5 {
     font-size: 13px;
     height: 25px;
     white-space: nowrap;
+    cursor: pointer;
 
 }
 .sign:hover{
@@ -526,4 +527,8 @@ input[type=number] {
 
 #submit_button_box{
     text-align: center;
+}
+
+#reset_password{
+    margin-top: 10px;
 }

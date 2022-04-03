@@ -91,7 +91,7 @@ def index():
     return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form, authenticated=authenticated)
 
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET'])
 def signup():
     return render_template('signup.html', title='Sign up')
 
@@ -99,3 +99,10 @@ def signup():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/resetpassword', methods=['GET'])
+def resetpassword():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    return render_template('resetpassword.html', title='Reset Password')
