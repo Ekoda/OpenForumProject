@@ -26,7 +26,7 @@ def create_user():
     response.status_code = 201
     return response
 
-@app.route('/api/resetpassword', methods=['POST'])
+@app.route('/api/resetpassword', methods=['PUT'])
 def api_reset_password():
     data = request.get_json() or {}
     if 'email' not in data:
@@ -36,7 +36,7 @@ def api_reset_password():
     user = User.query.filter_by(email=data['email']).first()
     send_password_reset_email(user)
     response = jsonify('Successfully reset password, check email for instructions')
-    response.status_code = 201
+    response.status_code = 200
     return response
 
 @app.route('/api/create_password', methods=['PUT'])

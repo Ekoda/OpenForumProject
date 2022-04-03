@@ -5,7 +5,7 @@ $('#reset_password').click(function(){
         "email": email}
 
     $.ajax({
-        type: "POST",
+        type: "PUT",
         url: api_url,
         data: JSON.stringify(data),
         contentType : 'application/json',
