@@ -49,7 +49,7 @@ def create_a_new_password():
     user = User.verify_reset_password_token(data['token'])
     if not user:
         return bad_request('invalid token')
-    user.user.set_password(data['password'])
+    user.set_password(data['password'])
     db.session.commit()
     response = jsonify('Successfully changed password')
     response.status_code = 200
