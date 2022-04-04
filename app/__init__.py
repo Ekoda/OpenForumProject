@@ -9,6 +9,7 @@ import os
 from flask_mail import Mail
 from flask_moment import Moment
 
+
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
@@ -17,9 +18,16 @@ login = LoginManager(app)
 mail = Mail(app)
 moment = Moment(app)
 
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+from app.auth import bp as auth_bp
+app.register_blueprint(auth_bp, url_prefix='/auth')
+from app.main import bp as main_bp
+app.register_blueprint(main_bp)
+from app.api import bp as api_bp
+app.register_blueprint(api_bp, url_prefix='/api')
 
-from app import routes, models
-from app.api import users
+from app import models
 
 if not app.debug:
     if app.config['MAIL_SERVER']:
