@@ -535,3 +535,9 @@ input[type=number] {
 #final_reset_password{
     margin-top: 10px;
 }
+
+
+#individual_notification:hover{
+    background-color: black;
+    
+}
