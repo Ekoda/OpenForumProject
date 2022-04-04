@@ -1,12 +1,12 @@
 from flask import render_template, flash, redirect, url_for, request
-from app import app
-from app.forms import LoginForm
-from flask_login import current_user, login_user, logout_user
+from app.main import bp
+from app.auth.forms import LoginForm
+from flask_login import current_user, login_user
 from app.models import User
 
 
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/index', methods=['GET', 'POST'])
 def index():
     authenticated = current_user.is_authenticated # This is passed to the template; conditions dictate which divs show
 
@@ -84,35 +84,8 @@ def index():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('index'))
+            return redirect(url_for('main.index'))
         login_user(user, remember=True)
         return redirect('index')
 
     return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form, authenticated=authenticated)
-
-
-@app.route('/signup', methods=['GET'])
-def signup():
-    return render_template('signup.html', title='Sign up')
-
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
-
-# Route for initial forgot password page
-@app.route('/resetpassword', methods=['GET'])
-def resetpassword():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    return render_template('resetpassword.html', title='Request Reset Password')
-
-# Route from reset password email token
-@app.route('/create_password/<token>', methods=['GET'])
-def create_password(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    user = User.verify_reset_password_token(token)
-    if not user:
-        return redirect(url_for('index'))
-    return render_template('create_password.html', title='Create Password')

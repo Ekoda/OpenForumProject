@@ -1,15 +1,17 @@
-from app import app, db
+from app import db
+from app.api import bp
 from flask import jsonify, request
 from app.models import User
 from app.api.errors import bad_request
-from app.email import send_password_reset_email
+from app.auth.email import send_password_reset_email
 
-@app.route('/api/users/<int:id>', methods=['GET'])
+@bp.route('/users/<int:id>', methods=['GET'])
 def get_user(id):
     data = User.query.get_or_404(id).to_dict()
     return jsonify(data)
     
-@app.route('/api/users', methods=['POST'])
+# Create Account API
+@bp.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json() or {}
     if 'username' not in data or 'email' not in data or 'password' not in data:
@@ -26,7 +28,7 @@ def create_user():
     response.status_code = 201
     return response
 
-@app.route('/api/resetpassword', methods=['PUT'])
+@bp.route('/resetpassword', methods=['PUT'])
 def api_reset_password():
     data = request.get_json() or {}
     if 'email' not in data:
@@ -39,7 +41,7 @@ def api_reset_password():
     response.status_code = 200
     return response
 
-@app.route('/api/create_password', methods=['PUT'])
+@bp.route('/create_password', methods=['PUT'])
 def create_a_new_password():
     data = request.get_json() or {}
     if 'token' not in data:

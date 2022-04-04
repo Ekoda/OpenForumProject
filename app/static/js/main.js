@@ -17,57 +17,29 @@ $("#hideopenforum").on("click", function(){
     }
 });
 
-/*
-
-// Optional alert message on change of page
-
-setTimeout(function() {
-    $('#web').on('load', function() {
-        alert('For security reasons Open Forum is not tracking the changing URL, please copy URL to the Open Forum model to enter the Forum of the page entered.');
-    });
-  }, 3000);
-*/
-
 // Sign in 
-$('#signin').on("click", function(){
+$('#signin').click(function(){
     $('#sign_in_container').css('display', 'flex')
     $('.sign').css('display', 'none')
     $('#main_signin_button').css('display', 'block')    
 })
 
-// Notification box 
-
-// To stop event from firing when clicking on child 
-$("#notificationbox").click(function(e){
-    e.stopPropagation();
-})
-
-// Toggle notifications
-$('#notification-button').on("click", function(){
-    if($('#notificationbox').css('display') == 'none'){
-        $('#notificationbox').css('display', 'block')
-    } else if ($('#notificationbox').css('display') == 'block'){
-        $('#notificationbox').css('display', 'none')
-    }
-})
-
-//Hide notification box on click outside
-$(document).mouseup(function(e) 
-{
+$(document).mouseup(function(e){
     let container = $("#notificationbox");
-    
     if (!container.is(e.target) && container.has(e.target).length === 0) 
     {
-        container.css('display', 'none');
+        container.hide(); 
     }
-    $('#notification-button').on("click", function(){
-        if($('#notificationbox').css('display') == 'none'){
-            $('#notificationbox').css('display', 'block')
-        } else if ($('#notificationbox').css('display') == 'block'){
-            $('#notificationbox').toggle()
-        }
-    })
 });
+
+// Function for notifications
+$('#notification-button').click(function(e){
+    e.stopPropagation();
+    $('#notificationbox').show();
+})
+
+
+
 
 //Scales text area with increasing text
 $("textarea").keyup(function(e) {
