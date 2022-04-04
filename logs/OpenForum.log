@@ -63,3 +63,5 @@ jinja2.exceptions.TemplateNotFound: email/reset_password.txt
 2022-04-04 17:22:43,939 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:56]
 2022-04-04 17:22:58,257 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:56]
 2022-04-04 18:07:06,053 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:58]
+2022-04-04 18:25:50,858 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:63]
+2022-04-04 18:31:39,391 INFO: Open Forum Project [in /Users/pontusblomqvist/Documents/Programming/Git/OpenForumProject/app/__init__.py:63]
