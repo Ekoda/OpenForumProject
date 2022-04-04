@@ -62,7 +62,7 @@ def create_app(config_class=Config):
             app.logger.setLevel(logging.INFO)
             app.logger.info('Open Forum Project')
 
-            return app
+        return app
 
 
 from app import models
