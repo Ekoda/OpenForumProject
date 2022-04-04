@@ -10,6 +10,7 @@ def get_user(id):
     data = User.query.get_or_404(id).to_dict()
     return jsonify(data)
     
+# Create Account API
 @bp.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json() or {}
