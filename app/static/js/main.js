@@ -38,9 +38,6 @@ $('#notification-button').click(function(e){
     $('#notificationbox').show();
 })
 
-
-
-
 //Scales text area with increasing text
 $("textarea").keyup(function(e) {
     while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
