@@ -52,7 +52,7 @@
               <div id="notificationbox">
 
                 {% for notifications in notifications %}
-                <div class="notification">
+                <div class="notification" id="individual_notification">
                   <img class="responsepic" src="{{ url_for('static', filename=notifications.image) }}">
                   <div class="textnotificationbox">
                   <p class="notificationtext"><block class="at" style="{{ notifications.color }}">{{ notifications.from.user }}</block> {{ notifications.text }}</p>
