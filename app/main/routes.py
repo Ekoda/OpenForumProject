@@ -15,7 +15,7 @@ def index():
         'from': {'user': 'Pontus Blomqvist'},
         'text': 'has responded to your comment X',
         'time': '1 week ago',
-        'image': 'images/profile.jpg',
+        'image': 'images/default.jpg',
         'color': 'color: #00e664;'
         },
         {
@@ -51,7 +51,7 @@ def index():
         },
         {
             'author': {'username': 'Pontus Blomqvist'},
-            'image': 'images/profile.jpg',
+            'image': 'images/default.jpg',
             'color': 'color: #00e664;',
             'comment': 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...',
             'score': '-5235',

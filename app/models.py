@@ -14,8 +14,8 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     notifications = db.relationship('UserNotifications', backref='author', lazy='dynamic')
     post_responses = db.relationship('PostResponse', backref='author', lazy='dynamic')
-    image = db.Column(db.String(64)) # Link to user image
-    color = db.Column(db.String(64)) # User Hex color
+    image = db.Column(db.String(64), default='images/default.jpg') # Link to user image
+    color = db.Column(db.String(64), default='#FFFFFF') # User Hex color
 
 
     def set_password(self, password):
@@ -66,12 +66,27 @@ def load_user(id):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    thread = db.Column(db.String(127), index=True, unique=True)
+    thread = db.Column(db.String(127), index=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    score = db.Column(db.Integer, index=True)
+    score = db.Column(db.Integer, index=True, default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     responses = db.relationship('PostResponse', backref='main', lazy='dynamic')
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'user_id': self.user_id,
+            'username': User.query.get(self.user_id).username,
+            'color': User.query.get(self.user_id).color,
+            'image': User.query.get(self.user_id).image,
+            'thread': self.thread,
+            'body': self.body,
+            'user_id': self.user_id,
+            'timestamp': self.timestamp,
+            'responses': [response.to_dict() for response in self.responses.all()]
+        }
+        return data
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
@@ -82,7 +97,23 @@ class PostResponse(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     body = db.Column(db.String(140))
-    score = db.Column(db.Integer, index=True)
+    score = db.Column(db.Integer, index=True, default=0)
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'user_id': self.user_id,
+            'username': User.query.get(self.user_id).username,
+            'color': User.query.get(self.user_id).color,
+            'image': User.query.get(self.user_id).image,
+            'response_to_username': User.query.get(self.response_to_id).username,
+            'response_to_color': User.query.get(self.response_to_id).color,
+            'response_to_id': self.response_to_id,
+            'timestamp': self.timestamp,
+            'body': self.body,
+            'score': self.score
+        }
+        return data
 
     def __repr__(self):
         return '<Post Response {}>'.format(self.body)
