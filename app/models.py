@@ -100,14 +100,15 @@ class PostResponse(db.Model):
     score = db.Column(db.Integer, index=True, default=0)
 
     def to_dict(self):
+        parent_user_id = Post.query.get(self.response_to_id).user_id
         data = {
             'id': self.id,
             'user_id': self.user_id,
             'username': User.query.get(self.user_id).username,
             'color': User.query.get(self.user_id).color,
             'image': User.query.get(self.user_id).image,
-            'response_to_username': User.query.get(self.response_to_id).username,
-            'response_to_color': User.query.get(self.response_to_id).color,
+            'response_to_username': User.query.get(parent_user_id).username,
+            'response_to_color': User.query.get(parent_user_id).color,
             'response_to_id': self.response_to_id,
             'timestamp': self.timestamp,
             'body': self.body,
