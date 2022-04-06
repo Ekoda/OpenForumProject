@@ -24,7 +24,7 @@ $('#final_reset_password').click(function(){
     if (password_one !== password_two){
         return alert("Please make sure your passwords match")
     }
-    let api_url = window.location.origin + "/api/create_password";
+    let api_url = window.location.origin + "/api/createpassword";
     let data = {
         "token": token,
         "password": password_one}
