@@ -10,3 +10,15 @@ def get_posts(thread_hash):
         'posts': [post.to_dict() for post in Post.query.filter_by(thread=thread_hash).all()]
     }
     return jsonify(data)
+
+@bp.route('/post', methods=['POST'])
+def post(data):
+    pass
+
+@bp.route('/postresponse', methods=['POST'])
+def postresponse(data):
+    pass
+
+@bp.route('/vote', methods=['PUT'])
+def vote(vote):
+    pass
