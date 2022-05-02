@@ -41,7 +41,7 @@ def api_reset_password():
     response.status_code = 200
     return response
 
-@bp.route('/create_password', methods=['PUT'])
+@bp.route('/createpassword', methods=['PUT'])
 def create_a_new_password():
     data = request.get_json() or {}
     if 'token' not in data:
