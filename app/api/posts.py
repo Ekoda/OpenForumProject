@@ -20,7 +20,7 @@ def get_posts(thread_hash):
 
 
 @bp.route('/posts/responses/<int:id>', methods=['GET'])
-def get_post_response(id):
+def get_response(id):
     return jsonify(PostResponse.query.get_or_404(id).to_dict())
 
 
@@ -31,11 +31,12 @@ def get_response_to_post(id):
     }
     if len(data['responses']) > 0:
         return jsonify(data)
-    return request_not_found('No response data to thread id: ' + str(id))
+    return request_not_found('No response data found in relation to thread id: ' + str(id))
 
 
 @bp.route('/posts', methods=['POST'])
 def post():
+    # Redevelop to authorize that the person is logged in and is posting from user ID
     data = request.get_json() or {}
     if 'thread' not in data or 'body' not in data or 'user_id' not in data:
         return bad_request('Must include thread, body, and user ID')
@@ -49,8 +50,8 @@ def post():
     return response
 
 
-@bp.route('/posts/responses', methods=['POST'])
-def postresponse():
+@bp.route('/posts/<int:id>/respond', methods=['POST'])
+def respond_to(id):
     pass
 
 

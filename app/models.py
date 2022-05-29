@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import jwt
 from time import time
-from flask import current_app
+from flask import current_app, url_for
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -85,7 +85,13 @@ class Post(db.Model):
             'score': self.score,
             'user_id': self.user_id,
             'timestamp': self.timestamp,
-            'responses': [response.to_dict() for response in self.responses.all()]
+            'responses': [response.to_dict() for response in self.responses.all()],
+            '_links': {
+                'self': url_for('api.get_post', id=self.id),
+                'responses': url_for('api.get_response_to_post', id=self.id),
+                'thread_origin': url_for('api.get_posts', thread_hash=self.thread),
+                'respond_to': url_for('api.respond_to', id=self.id)
+            }
         }
         return data
     
@@ -121,7 +127,13 @@ class PostResponse(db.Model):
             'response_to_id': self.response_to_id,
             'timestamp': self.timestamp,
             'body': self.body,
-            'score': self.score
+            'score': self.score,
+            '_links': {
+                'self': url_for('api.get_response', id=self.id),
+                'parent_post': url_for('api.get_post', id=self.response_to_id),
+                'thread_origin': url_for('api.get_posts', thread_hash=Post.query.get(self.response_to_id).thread),
+                'respond_to': url_for('api.respond_to', id=Post.query.get(self.response_to_id).id)
+            }
         }
         return data
 
