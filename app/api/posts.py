@@ -8,6 +8,7 @@ from app.api.errors import bad_request, request_not_found
 def get_post(id):
     return jsonify(Post.query.get_or_404(id).to_dict())
 
+
 @bp.route('/posts/<thread_hash>', methods=['GET'])
 def get_posts(thread_hash):
     data = {
@@ -17,9 +18,11 @@ def get_posts(thread_hash):
         return jsonify(data)
     return request_not_found('No post data on thread: ' + thread_hash)
 
+
 @bp.route('/posts/responses/<int:id>', methods=['GET'])
 def get_post_response(id):
     return jsonify(PostResponse.query.get_or_404(id).to_dict())
+
 
 @bp.route('/posts/<int:id>/responses', methods=['GET'])
 def get_response_to_post(id):
@@ -30,7 +33,8 @@ def get_response_to_post(id):
         return jsonify(data)
     return request_not_found('No response data to thread id: ' + str(id))
 
-@bp.route('/post', methods=['POST'])
+
+@bp.route('/posts', methods=['POST'])
 def post():
     data = request.get_json() or {}
     if 'thread' not in data or 'body' not in data or 'user_id' not in data:
@@ -44,10 +48,12 @@ def post():
     response.headers['Location'] = url_for('api.get_post', id=post.id)
     return response
 
+
 @bp.route('/posts/responses', methods=['POST'])
-def postresponse(data):
+def postresponse():
     pass
 
+
 @bp.route('/posts/vote', methods=['PUT'])
-def vote(vote):
+def vote():
     pass

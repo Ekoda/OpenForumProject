@@ -82,6 +82,7 @@ class Post(db.Model):
             'image': User.query.get(self.user_id).image,
             'thread': self.thread,
             'body': self.body,
+            'score': self.score,
             'user_id': self.user_id,
             'timestamp': self.timestamp,
             'responses': [response.to_dict() for response in self.responses.all()]
