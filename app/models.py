@@ -90,7 +90,8 @@ class Post(db.Model):
                 'self': url_for('api.get_post', id=self.id),
                 'responses': url_for('api.get_response_to_post', id=self.id),
                 'thread_origin': url_for('api.get_posts', thread_hash=self.thread),
-                'respond_to': url_for('api.respond_to', id=self.id)
+                'respond_to': url_for('api.respond_to', id=self.id),
+                'post_to_thread': url_for('api.post')
             }
         }
         return data

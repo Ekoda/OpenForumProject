@@ -34,7 +34,7 @@ def get_response_to_post(id):
     return request_not_found('No response data found in relation to thread id: ' + str(id))
 
 
-@bp.route('/posts', methods=['POST'])
+@bp.route('/post', methods=['POST'])
 def post():
     # Redevelop to authorize that the person is logged in and is posting from user ID
     data = request.get_json() or {}
