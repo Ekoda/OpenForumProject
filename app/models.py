@@ -87,6 +87,14 @@ class Post(db.Model):
             'responses': [response.to_dict() for response in self.responses.all()]
         }
         return data
+    
+    def responses_to_dict(self):
+        return [response.to_dict() for response in self.responses.all()]
+
+    def from_dict(self, data):
+        for field in ['thread', 'body', 'user_id']:
+            if field in data:
+                setattr(self, field, data[field])
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
