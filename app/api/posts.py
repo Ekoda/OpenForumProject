@@ -74,3 +74,15 @@ def respond_to(id):
 @token_auth.login_required
 def vote():
     pass
+
+
+@bp.route('/posts/<int:id>', methods=['DELETE'])
+@token_auth.login_required
+def delete_post(id):
+    pass
+
+
+@bp.route('/posts/<int:id>/responses', methods=['DELETE'])
+@token_auth.login_required
+def delete_response(id):
+    pass
