@@ -1,10 +1,12 @@
 from app import db, login
-from datetime import datetime
+from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import jwt
 from time import time
 from flask import current_app, url_for
+import os
+import base64
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +18,8 @@ class User(UserMixin, db.Model):
     post_responses = db.relationship('PostResponse', backref='author', lazy='dynamic')
     image = db.Column(db.String(64), default='images/default.jpg') # Link to user image
     color = db.Column(db.String(64), default='#FFFFFF') # User Hex color
+    token = db.Column(db.String(32), index=True, unique=True)
+    token_expiration = db.Column(db.DateTime)
 
 
     def set_password(self, password):
@@ -57,12 +61,32 @@ class User(UserMixin, db.Model):
             return
         return User.query.get(id)
 
+    def get_token(self, expires_in=3600):
+        now = datetime.utcnow()
+        if self.token and self.token_expiration > now + timedelta(seconds=60):
+            return self.token
+        self.token = base64.b64encode(os.urandom(24)).decode('utf-8')
+        self.token_expiration = now + timedelta(seconds=expires_in)
+        db.session.add(self)
+        return self.token
+
+    def revoke_token(self):
+        self.token_expiration = datetime.utcnow() - timedelta(seconds=1)
+
+    @staticmethod
+    def check_token(token):
+        user = User.query.filter_by(token=token).first()
+        if user is None or user.token_expiration < datetime.utcnow():
+            return None
+        return user
+
     def __repr__(self):
         return '<User{}>'.format(self.username)
 
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -89,7 +113,7 @@ class Post(db.Model):
             '_links': {
                 'self': url_for('api.get_post', id=self.id),
                 'responses': url_for('api.get_response_to_post', id=self.id),
-                'thread_origin': url_for('api.get_posts', thread_hash=self.thread),
+                'thread': url_for('api.get_posts', thread_hash=self.thread),
                 'respond_to': url_for('api.respond_to', id=self.id),
                 'post_to_thread': url_for('api.post')
             }
@@ -106,6 +130,7 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
 
 class PostResponse(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -132,11 +157,16 @@ class PostResponse(db.Model):
             '_links': {
                 'self': url_for('api.get_response', id=self.id),
                 'parent_post': url_for('api.get_post', id=self.response_to_id),
-                'thread_origin': url_for('api.get_posts', thread_hash=Post.query.get(self.response_to_id).thread),
+                'thread': url_for('api.get_posts', thread_hash=Post.query.get(self.response_to_id).thread),
                 'respond_to': url_for('api.respond_to', id=Post.query.get(self.response_to_id).id)
             }
         }
         return data
+
+    def from_dict(self, data):
+        for field in ['response_to_id', 'body', 'user_id']:
+            if field in data:
+                setattr(self, field, data[field])
 
     def __repr__(self):
         return '<Post Response {}>'.format(self.body)

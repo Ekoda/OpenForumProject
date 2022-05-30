@@ -45,13 +45,13 @@ h5 {
 
 #web{
     height: 100vh; 
-    width: 80%;
+    width: 75%;
     z-index: 50;
 }
 
 #chat{
     height: 100vh;
-    width: 20%;
+    width: 25%;
     background-color: #343432;
     overflow: hidden
 
@@ -302,7 +302,7 @@ h5 {
 
 }
 
-@media (max-width: 500px){
+@media (max-width: 850px){
     #web{
         display: none;
         width: 0px;

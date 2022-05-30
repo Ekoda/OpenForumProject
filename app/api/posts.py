@@ -1,8 +1,9 @@
 from app import db
 from app.api import bp
-from flask import jsonify, request, url_for
+from flask import jsonify, request, url_for, abort
 from app.models import Post, PostResponse
 from app.api.errors import bad_request, request_not_found
+from app.api.auth import token_auth
 
 @bp.route('/posts/<int:id>', methods=['GET'])
 def get_post(id):
@@ -35,11 +36,12 @@ def get_response_to_post(id):
 
 
 @bp.route('/post', methods=['POST'])
+@token_auth.login_required
 def post():
-    # Redevelop to authorize that the person is logged in and is posting from user ID
     data = request.get_json() or {}
-    if 'thread' not in data or 'body' not in data or 'user_id' not in data:
-        return bad_request('Must include thread, body, and user ID')
+    if 'thread' not in data or 'body' not in data:
+        return bad_request('Must include thread, body')
+    data['user_id'] = token_auth.current_user().id
     post = Post()
     post.from_dict(data)
     db.session.add(post)
@@ -51,10 +53,24 @@ def post():
 
 
 @bp.route('/posts/<int:id>/respond', methods=['POST'])
+@token_auth.login_required
 def respond_to(id):
-    pass
+    data = request.get_json() or {}
+    if 'body' not in data:
+        return bad_request('Must include the id of the post which is being responded to and body')
+    data['response_to_id'] = id   
+    data['user_id'] = token_auth.current_user().id
+    post_response = PostResponse()
+    post_response.from_dict(data)
+    db.session.add(post_response)
+    db.session.commit()
+    response = jsonify(post_response.to_dict())
+    response.status_code = 201
+    response.headers['Location'] = url_for('api.get_response_to_post', id=post_response.id)
+    return response
 
 
 @bp.route('/posts/vote', methods=['PUT'])
+@token_auth.login_required
 def vote():
     pass
