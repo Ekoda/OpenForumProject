@@ -102,7 +102,9 @@ def thread(thread_hash):
         login_user(user, remember=True)
         return redirect('index')
 
-    user = User.query.get(current_user.get_id()).to_dict()
+    user = User.query.get(current_user.get_id())
+    if user != None:
+        user = user.to_dict()
     notifications = [
         {
         'from': {'user': 'Pontus Blomqvist'},
