@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     notifications = db.relationship('UserNotifications', backref='author', lazy='dynamic')
     post_responses = db.relationship('PostResponse', backref='author', lazy='dynamic')
-    image = db.Column(db.String(64), default='images/default.jpg') # Link to user image
+    image = db.Column(db.String(64), default='static/images/default.jpg') # Link to user image
     color = db.Column(db.String(64), default='#FFFFFF') # User Hex color
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)

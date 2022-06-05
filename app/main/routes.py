@@ -89,3 +89,42 @@ def index():
         return redirect('index')
 
     return render_template('main.html', title='Open Forum', user=user, comments=comments, notifications=notifications, form=form, authenticated=authenticated)
+
+@bp.route('/<thread_hash>', methods=['GET', 'POST'])
+def thread(thread_hash):
+    authenticated = current_user.is_authenticated
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('main.index'))
+        login_user(user, remember=True)
+        return redirect('index')
+
+    user = User.query.get(current_user.get_id()).to_dict()
+    notifications = [
+        {
+        'from': {'user': 'Pontus Blomqvist'},
+        'text': 'has responded to your comment X',
+        'time': '1 week ago',
+        'image': 'images/default.jpg',
+        'color': 'color: #00e664;'
+        },
+        {
+        'from': {'user': 'Eliška Rychetská'},
+        'text': 'has responded to your comment X',
+        'time': '1 week ago',
+        'image': 'images/user1.jpg',
+        'color': 'color: #bf279b;'
+        },
+        {
+        'from': {'user': 'Noam Chomsky'},
+        'text': 'has responded to your comment X',
+        'time': '2 week ago',
+        'image': 'images/user3.png',
+        'color': 'color: #e67600;'
+        }
+    ] # Placeholder
+
+    return render_template('thread.html', title='Open Forum', form=form, authenticated=authenticated, user=user, notifications=notifications)
