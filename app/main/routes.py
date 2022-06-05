@@ -98,13 +98,14 @@ def thread(thread_hash):
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('main.index'))
+            return redirect(thread_hash)
         login_user(user, remember=True)
-        return redirect('index')
+        return redirect(thread_hash)
 
     user = User.query.get(current_user.get_id())
     if user != None:
         user = user.to_dict()
+
     notifications = [
         {
         'from': {'user': 'Pontus Blomqvist'},
