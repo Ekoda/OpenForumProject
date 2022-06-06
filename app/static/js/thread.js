@@ -12,23 +12,47 @@ class Thread extends React.Component {
         const url = window.location.origin + "/api/posts/" + this.state.thread
         fetch(url)
         .then(response => response.json())
-        .then(data => this.setState({posts: data.posts}))
+        .then(data => {
+            
+            data.posts.map(post => {
+                post['respond_data'] = { 
+                    display: "none", 
+                };
+                post.responses.map(response => {
+                    response['respond_data'] = { 
+                        display: "none", 
+                    };
+                        });
+                    });
+            this.setState({posts: data.posts})
+        })
+
+    }
+
+    respondTo = (post) => {
+        const data = post.respond_data;
+        data.display = data.display == "none" ? "block" : "none";
+        this.forceUpdate();
         
     }
+
 
     displayPosts = () => {
         const posts = this.state.posts
         return (
             <div>
-                {posts.map((post) => 
-                    <div className="comment"> 
+                
+                {posts.map((post) =>  
+                    <div className="comment">
                         <img className="userpic" src={post.image}/>
                         <div className="text-box">
                             <h4 className="username" style={{color: post.color}}>{post.username}</h4>
                             <p>{post.body}</p>
-                            <textarea className="responseinput" type="text" placeholder="Respond..."></textarea>
+                            <div className="responseinputcontainer"> 
+                            <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: post.respond_data.display}}></textarea>
+                            </div>
                             <div className="comment-interact">
-                            <p className="numbers">{post.score}</p><i className="fas fa-light fa-chevron-up"></i> <i className="fas fa-light fa-chevron-down"></i><p className="timer">{ moment(post.timestamp).fromNow()}</p> <p id={post.id} className="respond">Respond</p>
+                            <p className="numbers">{post.score}</p><i className="fas fa-light fa-chevron-up"></i> <i className="fas fa-light fa-chevron-down"></i><p className="timer">{ moment(post.timestamp).fromNow()}</p> <p className="respond" onClick={ () => this.respondTo(post) }>Respond</p>
                             </div>
                         
                             {post.responses.map((response) =>
@@ -37,13 +61,15 @@ class Thread extends React.Component {
                                 <div className="response-text"> 
                                     <h5 className="username" style={{ color: response.color }}>{ response.username }</h5>
                                     <p><span className="at username">{ "#" + response.response_to_username }</span> { response.body }</p>
-                                    <textarea className="responseinput" type="text" placeholder="Respond..."></textarea>
+                                    <div className="responseinputcontainer"> 
+                                    <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: response.respond_data.display}}></textarea>
+                                    </div>
                                     <div className="comment-interact">
                                         <p className="numbers">{ response.score }</p>
                                         <i className="fas fa-light fa-chevron-up"></i>
                                         <i className="fas fa-light fa-chevron-down"></i>
                                         <p className="timer">{ moment(response.timestamp).fromNow() }</p>
-                                        <p id={response.id} className="respond">Respond</p>
+                                        <p className="respond" onClick={() => this.respondTo(response)}>Respond</p>
                                     </div>
                                 </div>
                             </div>
@@ -82,6 +108,7 @@ class Thread extends React.Component {
         );
     }
 }
+
 
 ReactDOM.render(
   <Thread />,
