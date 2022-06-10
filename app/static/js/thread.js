@@ -43,22 +43,23 @@ class Thread extends React.Component {
         this.forceUpdate();
         var response_body = data.body.trim();
         if (response_body.length > 0) {
-        const url = window.location.origin + "/api/post/" + post.id + "/respond";
-        const request = {
-            method: "POST",
-            headers: { 
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + this.state.token},
-            body: JSON.stringify({
-                body: response_body
-            })};
-        fetch(url, request).then(response => response.json()).then(data => {
-            data['respond_data'] = { 
-                display: "none",
-                body: "",
-            };
-            post.responses.push(data);
-            this.forceUpdate();
+            const url = window.location.origin + "/api/post/" + post.id + "/respond";
+            const request = {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + this.state.token},
+                body: JSON.stringify({
+                    body: response_body,
+                    response_to_id: post.user_id
+                })};
+            fetch(url, request).then(response => response.json()).then(data => {
+                data['respond_data'] = { 
+                    display: "none",
+                    body: "",
+                };
+                post.responses.push(data);
+                this.forceUpdate();
         });}
         data.body = "";
     }

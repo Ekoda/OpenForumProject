@@ -135,6 +135,7 @@ class Post(db.Model):
 class PostResponse(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     response_to_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    response_to_user_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     body = db.Column(db.String(140))

@@ -54,12 +54,15 @@ h5 {
     background-color: #343432;
     overflow: scroll;
     overflow-x: hidden;
+    padding-right: 10px;
 
 }
 
 #chathead{
     background-color: #1F1F1E;
     height: 75px;
+    width: 100%;
+    padding-right:10px;
 }
 
 #profile{
@@ -67,6 +70,7 @@ h5 {
     height: 50px;
     display: flex;
     align-items: center;
+    width: auto;
 
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
@@ -84,11 +88,10 @@ h5 {
 
 #info{
     height: 100%;
-    width: 40%;
+    width: 100%;
     display: flex;
     justify-content: right;
     align-items: center;
-    padding-right: 15px;
 }
 
 #picture{
@@ -107,6 +110,7 @@ h5 {
 
 #place{
     font-family: 'Roboto', sans-serif;
+    width: 100%;
 
 }
 
@@ -119,6 +123,7 @@ h5 {
     border-radius: 0px;
     border-right: none;
     border-left: none;
+    padding-right:10px;
 }
 
 #chatarea{
@@ -126,9 +131,6 @@ h5 {
     display: flex;
     flex-direction: column;
     width: auto;
-    
-   
-
 }
 
 #comments{
@@ -143,7 +145,7 @@ h5 {
 }
 #poster{
     height:19px;
-    width: 98%;
+    width: 101%;
     opacity: 0.6;
     border: none;
     padding-left: 5px;
