@@ -5,34 +5,79 @@ class Thread extends React.Component {
         this.state = {
             thread: window.location.pathname.substring(1),
             posts: [],
+            token: "",
         }
     }
 
     componentDidMount() {
-        const url = window.location.origin + "/api/posts/" + this.state.thread
-        fetch(url)
+
+        // Initializes thread posts and adds response data for each post and response
+        fetch(window.location.origin + "/api/posts/" + this.state.thread)
         .then(response => response.json())
         .then(data => {
             data.posts.map(post => {
                 post['respond_data'] = { 
                     display: "none", 
+                    body: "",
                 };
                 post.responses.map(response => {
                     response['respond_data'] = { 
-                        display: "none", 
+                        display: "none",
+                        body: "",
                     };
                         });
                     });
             this.setState({posts: data.posts})
         })
 
+        // Retrieves authentication token
+        fetch(window.location.origin + "/api/tokens", {method: "POST", headers: {"Content-Type": "application/json"}})
+        .then(response => response.json())
+        .then(data => this.setState({token: data.token}));
+
     }
 
-    respondTo = (post) => {
+    respondToPost = (post) => {
         const data = post.respond_data;
+        
         data.display = data.display == "none" ? "block" : "none";
         this.forceUpdate();
         
+        var response_body = data.body.trim();
+    
+        if (response_body.length > 0) {
+        const url = window.location.origin + "/api/post/" + post.id + "/respond";
+        const request = {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + this.state.token},
+            body: JSON.stringify({
+                body: response_body
+            })};
+        fetch(url, request).then(response => response.json()).then(data => {
+            data['respond_data'] = { 
+                display: "none",
+                body: "",
+            };
+            post.responses.push(data);
+            this.forceUpdate();
+        })
+        }
+    }
+
+    respondToResponse = (response) => {
+        const data = response.respond_data;
+        
+        data.display = data.display == "none" ? "block" : "none";
+        this.forceUpdate();
+
+        const response_body = data.body.trim();
+        
+        if (response_body.length > 0) {
+        // Post response api call
+        }
+
     }
 
 
@@ -48,10 +93,10 @@ class Thread extends React.Component {
                             <h4 className="username" style={{color: post.color}}>{post.username}</h4>
                             <p>{post.body}</p>
                             <div className="responseinputcontainer"> 
-                            <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: post.respond_data.display}}></textarea>
+                            <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: post.respond_data.display}} onChange={e => post.respond_data.body = e.target.value}></textarea>
                             </div>
                             <div className="comment-interact">
-                            <p className="numbers">{post.score}</p><i className="fas fa-light fa-chevron-up"></i> <i className="fas fa-light fa-chevron-down"></i><p className="timer">{ moment(post.timestamp).fromNow()}</p> <p className="respond" onClick={ () => this.respondTo(post) }>Respond</p>
+                            <p className="numbers">{post.score}</p><i className="fas fa-light fa-chevron-up"></i> <i className="fas fa-light fa-chevron-down"></i><p className="timer">{ moment(post.timestamp).fromNow()}</p> <p className="respond" onClick={ () => this.respondToPost(post) }>Respond</p>
                             </div>
                         
                             {post.responses.map((response) =>
@@ -59,16 +104,16 @@ class Thread extends React.Component {
                                 <img className="responsepic" src={response.image}/>
                                 <div className="response-text"> 
                                     <h5 className="username" style={{ color: response.color }}>{ response.username }</h5>
-                                    <p><span className="at username">{ "#" + response.response_to_username }</span> { response.body }</p>
+                                    <p><span className="at username">{ response.response_to_username }</span> { response.body }</p>
                                     <div className="responseinputcontainer"> 
-                                    <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: response.respond_data.display}}></textarea>
+                                    <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: response.respond_data.display}} onChange={e => response.respond_data.body = e.target.value}></textarea>
                                     </div>
                                     <div className="comment-interact">
                                         <p className="numbers">{ response.score }</p>
                                         <i className="fas fa-light fa-chevron-up"></i>
                                         <i className="fas fa-light fa-chevron-down"></i>
                                         <p className="timer">{ moment(response.timestamp).fromNow() }</p>
-                                        <p className="respond" onClick={() => this.respondTo(response)}>Respond</p>
+                                        <p className="respond" onClick={() => this.respondToResponse(response)}>Respond</p>
                                     </div>
                                 </div>
                             </div>

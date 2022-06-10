@@ -52,12 +52,12 @@ def post():
     return response
 
 
-@bp.route('/posts/<int:id>/respond', methods=['POST'])
+@bp.route('/post/<int:id>/respond', methods=['POST'])
 @token_auth.login_required
 def respond_to(id):
     data = request.get_json() or {}
     if 'body' not in data:
-        return bad_request('Must include the id of the post which is being responded to and body')
+        return bad_request('Must include the body of the response')
     data['response_to_id'] = id   
     data['user_id'] = token_auth.current_user().id
     post_response = PostResponse()

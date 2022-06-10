@@ -8,7 +8,6 @@ input { font-size: smaller }
 
 textarea:focus, input:focus{
     outline: none;
-    overflow:hidden
 }
 
 p {
@@ -50,10 +49,11 @@ h5 {
 }
 
 #chat{
-    height: 100vh;
+    height: auto;
     width: 25%;
     background-color: #343432;
-    overflow: hidden
+    overflow: scroll;
+    overflow-x: hidden;
 
 }
 
@@ -122,16 +122,19 @@ h5 {
 }
 
 #chatarea{
-    height: 91%;
+    height: auto;
     display: flex;
     flex-direction: column;
+    width: auto;
+    
    
 
 }
 
 #comments{
     height:auto;
-    width: 100%;
+    width: auto;
+    background-color: #343432;
 }
 #post{
     width: 100%;
@@ -140,7 +143,7 @@ h5 {
 }
 #poster{
     height:19px;
-    width: 100%;
+    width: 98%;
     opacity: 0.6;
     border: none;
     padding-left: 5px;
@@ -176,6 +179,7 @@ h5 {
     font-size: normal;
     margin-top: 5px;
     padding-left: 5px;
+    background-color: #343432;
 }
 
 #comment_input{
@@ -186,7 +190,6 @@ h5 {
     justify-content: space-between;
     font-family: 'Lato', sans-serif;
     font-size: normal;
-    overflow:hidden;
     margin: 4px;
     margin-bottom: 10px;
 
@@ -243,7 +246,6 @@ h5 {
     padding: 0px;
     margin: 2px;
     color: #E9FFF9;
-    position: absolute;
     right: 10px;
     font-family: 'Roboto', sans-serif;
     font-size: smaller;
@@ -313,7 +315,7 @@ h5 {
     }
 
     #chat{
-        height: 100vh;
+        height: auto;
         width: 100%;
     }
 
@@ -419,19 +421,17 @@ h5 {
 .responseinputcontainer{
     width: auto;
     margin-right: 9px;
-    overflow: hidden;
 }
 
 .responseinput{
     display: none;
     height: 18px;
-    width: 100%;
+    width: 98%;
     opacity: 0.6;
     border: none;
     padding-left: 5px;
     resize: none;
     margin: none;
-    margin-right: 20px;
     font-family: 'Lato', sans-serif;
     background-color: white;
     
