@@ -10,7 +10,6 @@ class Thread extends React.Component {
     }
 
     componentDidMount() {
-
         // Initializes thread posts and adds response data for each post and response
         fetch(window.location.origin + "/api/posts/" + this.state.thread)
         .then(response => response.json())
@@ -62,8 +61,8 @@ class Thread extends React.Component {
             };
             post.responses.push(data);
             this.forceUpdate();
-        })
-        }
+        });}
+        data.body = "";
     }
 
     respondToResponse = (response) => {
@@ -93,10 +92,14 @@ class Thread extends React.Component {
                             <h4 className="username" style={{color: post.color}}>{post.username}</h4>
                             <p>{post.body}</p>
                             <div className="responseinputcontainer"> 
-                            <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: post.respond_data.display}} onChange={e => post.respond_data.body = e.target.value}></textarea>
+                            <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: post.respond_data.display}} onChange={e => {post.respond_data.body = e.target.value; this.forceUpdate()}} value={post.respond_data.body}></textarea>
                             </div>
                             <div className="comment-interact">
-                            <p className="numbers">{post.score}</p><i className="fas fa-light fa-chevron-up"></i> <i className="fas fa-light fa-chevron-down"></i><p className="timer">{ moment(post.timestamp).fromNow()}</p> <p className="respond" onClick={ () => this.respondToPost(post) }>Respond</p>
+                                <p className="numbers">{post.score}</p>
+                                <i className="fas fa-light fa-chevron-up"></i>
+                                <i className="fas fa-light fa-chevron-down"></i>
+                                <p className="timer">{ moment(post.timestamp).fromNow()}</p>
+                                <p className="respond" onClick={ () => this.respondToPost(post) }>Respond</p>
                             </div>
                         
                             {post.responses.map((response) =>
@@ -140,7 +143,7 @@ class Thread extends React.Component {
                         <div id="comment_input">
                             <div className="text-box">
                                 <textarea id="poster" placeholder="Comment..."></textarea>
-                                <p className="respond" id="comment">Comment</p>
+                                <p className="respond" id="comment_button">Comment</p>
                             </div>
                         </div>
 
