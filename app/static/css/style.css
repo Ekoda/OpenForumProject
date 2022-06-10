@@ -215,6 +215,7 @@ h5 {
 
 .comment-interact{
     border-top: solid 1px #1F1F1E;
+    width: 94%;
     display: flex;
     align-items: center;
     margin: auto;
@@ -250,7 +251,6 @@ h5 {
     font-family: 'Roboto', sans-serif;
     font-size: smaller;
     margin-left: auto;
-    padding-right: 10px
 }
 
 .respond:hover{
@@ -572,5 +572,4 @@ input[type=number] {
 
 #comment_button{
     text-align: right;
-    margin-right: -7px;
 }
