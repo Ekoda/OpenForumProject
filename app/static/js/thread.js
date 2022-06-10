@@ -6,6 +6,7 @@ class Thread extends React.Component {
             thread: window.location.pathname.substring(1),
             posts: [],
             token: "",
+            new_post: "",
         }
     }
 
@@ -38,12 +39,9 @@ class Thread extends React.Component {
 
     respondToPost = (post) => {
         const data = post.respond_data;
-        
         data.display = data.display == "none" ? "block" : "none";
         this.forceUpdate();
-        
         var response_body = data.body.trim();
-    
         if (response_body.length > 0) {
         const url = window.location.origin + "/api/post/" + post.id + "/respond";
         const request = {
@@ -63,6 +61,32 @@ class Thread extends React.Component {
             this.forceUpdate();
         });}
         data.body = "";
+    }
+
+    postComment = () => {
+        const url = window.location.origin + "/api/post";
+        const comment = this.state.new_post;
+        const data = comment.trim();
+        if (data.length > 0) {
+            const request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + this.state.token},
+                body: JSON.stringify({
+                    body: comment,
+                    thread: this.state.thread
+                })};
+            fetch(url, request).then(response => response.json()).then(data => {
+                data['respond_data'] = {
+                    display: "none",
+                    body: "",
+                };
+                this.state.posts.push(data);
+                this.forceUpdate();
+            });
+            this.setState({new_post: ""});
+        }
     }
 
     respondToResponse = (response) => {
@@ -142,8 +166,8 @@ class Thread extends React.Component {
                         
                         <div id="comment_input">
                             <div className="text-box">
-                                <textarea id="poster" placeholder="Comment..."></textarea>
-                                <p className="respond" id="comment_button">Comment</p>
+                                <textarea id="poster" placeholder="Comment..." onChange={e => this.setState({new_post: e.target.value})} value={this.state.new_post}></textarea>
+                                <p className="respond" id="comment_button" onClick={this.postComment}>Comment</p>
                             </div>
                         </div>
 
