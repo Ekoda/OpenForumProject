@@ -56,9 +56,9 @@ def post():
 @token_auth.login_required
 def respond_to(id):
     data = request.get_json() or {}
-    if 'response_to_id' not in data or 'body' not in data:
-        return bad_request('Must include the body of the response')
-    data['response_to_id'] = id   
+    if 'response_to_user_id' not in data or 'body' not in data:
+        return bad_request('Must include the response to user id and body of the response')
+    data['response_to_post_id'] = id   
     data['user_id'] = token_auth.current_user().id
     post_response = PostResponse()
     post_response.from_dict(data)

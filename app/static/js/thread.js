@@ -51,7 +51,7 @@ class Thread extends React.Component {
                     "Authorization": "Bearer " + this.state.token},
                 body: JSON.stringify({
                     body: response_body,
-                    response_to_id: post.user_id
+                    response_to_user_id: post.user_id,
                 })};
             fetch(url, request).then(response => response.json()).then(data => {
                 data['respond_data'] = { 
@@ -90,7 +90,7 @@ class Thread extends React.Component {
         }
     }
 
-    respondToResponse = (response) => {
+    respondToResponse = (response, parent) => {
         const data = response.respond_data;
         
         data.display = data.display == "none" ? "block" : "none";
@@ -99,8 +99,24 @@ class Thread extends React.Component {
         const response_body = data.body.trim();
         
         if (response_body.length > 0) {
-        // Post response api call
-        }
+            const url = window.location.origin + "/api/post/" + response.response_to_post_id + "/respond";
+            const request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + this.state.token},
+                body: JSON.stringify({
+                    body: response_body,
+                    response_to_user_id: response.user_id,
+                })};
+            fetch(url, request).then(response => response.json()).then(data => {
+                data['respond_data'] = {
+                    display: "none",
+                    body: "",
+                };
+            parent.responses.push(data);
+            this.forceUpdate();
+        });}
 
     }
 
@@ -141,7 +157,7 @@ class Thread extends React.Component {
                                         <i className="fas fa-light fa-chevron-up"></i>
                                         <i className="fas fa-light fa-chevron-down"></i>
                                         <p className="timer">{ moment(response.timestamp).fromNow() }</p>
-                                        <p className="respond" onClick={() => this.respondToResponse(response)}>Respond</p>
+                                        <p className="respond" onClick={() => this.respondToResponse(response, post)}>Respond</p>
                                     </div>
                                 </div>
                             </div>
