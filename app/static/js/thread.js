@@ -117,12 +117,18 @@ class Thread extends React.Component {
             parent.responses.push(data);
             this.forceUpdate();
         });}
-
     }
-
 
     displayPosts = () => {
         const posts = this.state.posts
+        if (posts.length == 0) {
+            return(
+                <div id="noPosts">
+                    <h4>No Comments Yet</h4>
+                    <p>Be the first one to share what you think!</p> 
+                </div>)
+        }
+
         return (
             <div>
                 
@@ -133,7 +139,7 @@ class Thread extends React.Component {
                             <h4 className="username" style={{color: post.color}}>{post.username}</h4>
                             <p>{post.body}</p>
                             <div className="responseinputcontainer"> 
-                            <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: post.respond_data.display}} onChange={e => {post.respond_data.body = e.target.value; this.forceUpdate()}} value={post.respond_data.body}></textarea>
+                            <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: post.respond_data.display}} onChange={e => {post.respond_data.body = e.target.value; this.forceUpdate()}} value={post.respond_data.body} onKeyDown={this.adjustInput}></textarea>
                             </div>
                             <div className="comment-interact">
                                 <p className="numbers">{post.score}</p>
@@ -150,7 +156,7 @@ class Thread extends React.Component {
                                     <h5 className="username" style={{ color: response.color }}>{ response.username }</h5>
                                     <p><span className="at username">{ response.response_to_username }</span> { response.body }</p>
                                     <div className="responseinputcontainer"> 
-                                    <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: response.respond_data.display}} onChange={e => response.respond_data.body = e.target.value}></textarea>
+                                    <textarea className="responseinput" type="text" placeholder="Respond..." style={{display: response.respond_data.display}} onChange={e => response.respond_data.body = e.target.value} onKeyDown={this.adjustInput}></textarea>
                                     </div>
                                     <div className="comment-interact">
                                         <p className="numbers">{ response.score }</p>
@@ -170,6 +176,11 @@ class Thread extends React.Component {
             </div>)
     }
 
+    adjustInput = (e) => {
+        e.target.style.height = 'inherit';
+        e.target.style.height = `${e.target.scrollHeight}px`;
+    }
+
     render(){
         return (
             <div>
@@ -183,7 +194,7 @@ class Thread extends React.Component {
                         
                         <div id="comment_input">
                             <div className="text-box">
-                                <textarea id="poster" placeholder="Comment..." onChange={e => this.setState({new_post: e.target.value})} value={this.state.new_post}></textarea>
+                                <textarea id="poster" placeholder="Comment..." onChange={e => this.setState({new_post: e.target.value})} value={this.state.new_post} onKeyDown={this.adjustInput}></textarea>
                                 <p className="respond" id="comment_button" onClick={this.postComment}>Comment</p>
                             </div>
                         </div>

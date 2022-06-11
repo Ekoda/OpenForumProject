@@ -37,13 +37,3 @@ $('#notification-button').click(function(e){
     e.stopPropagation();
     $('#notificationbox').show();
 })
-
-
-
-
-//Scales text area with increasing text
-$("textarea").keyup(function(e) {
-    while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
-        $(this).height($(this).height()+1);
-    };
-});
