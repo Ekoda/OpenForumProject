@@ -8,7 +8,6 @@ input { font-size: smaller }
 
 textarea:focus, input:focus{
     outline: none;
-    overflow:hidden
 }
 
 p {
@@ -50,16 +49,20 @@ h5 {
 }
 
 #chat{
-    height: 100vh;
+    height: auto;
     width: 25%;
     background-color: #343432;
-    overflow: hidden
+    overflow: scroll;
+    overflow-x: hidden;
+    padding-right: 10px;
 
 }
 
 #chathead{
     background-color: #1F1F1E;
     height: 75px;
+    width: 100%;
+    padding-right:10px;
 }
 
 #profile{
@@ -67,6 +70,7 @@ h5 {
     height: 50px;
     display: flex;
     align-items: center;
+    width: auto;
 
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
@@ -84,11 +88,10 @@ h5 {
 
 #info{
     height: 100%;
-    width: 40%;
+    width: 100%;
     display: flex;
     justify-content: right;
     align-items: center;
-    padding-right: 15px;
 }
 
 #picture{
@@ -107,6 +110,7 @@ h5 {
 
 #place{
     font-family: 'Roboto', sans-serif;
+    width: 100%;
 
 }
 
@@ -119,19 +123,20 @@ h5 {
     border-radius: 0px;
     border-right: none;
     border-left: none;
+    padding-right:10px;
 }
 
 #chatarea{
-    height: 91%;
+    height: auto;
     display: flex;
     flex-direction: column;
-   
-
+    width: auto;
 }
 
 #comments{
     height:auto;
-    width: 100%;
+    width: auto;
+    background-color: #343432;
 }
 #post{
     width: 100%;
@@ -139,8 +144,8 @@ h5 {
     
 }
 #poster{
-    height:19px;
-    width: 100%;
+    height: 36px;
+    width: 101%;
     opacity: 0.6;
     border: none;
     padding-left: 5px;
@@ -150,6 +155,7 @@ h5 {
     background-color: white;
     
 }
+
 #poster:focus{
     opacity: 1;
 }
@@ -175,6 +181,7 @@ h5 {
     font-size: normal;
     margin-top: 5px;
     padding-left: 5px;
+    background-color: #343432;
 }
 
 #comment_input{
@@ -185,7 +192,6 @@ h5 {
     justify-content: space-between;
     font-family: 'Lato', sans-serif;
     font-size: normal;
-    overflow:hidden;
     margin: 4px;
 
 }
@@ -202,12 +208,15 @@ h5 {
     width: 100%;
     height: auto;
     color: white;
+    
+    
 
     
 }
 
 .comment-interact{
     border-top: solid 1px #1F1F1E;
+    width: 94%;
     display: flex;
     align-items: center;
     margin: auto;
@@ -239,12 +248,12 @@ h5 {
     padding: 0px;
     margin: 2px;
     color: #E9FFF9;
-    position: absolute;
     right: 10px;
     font-family: 'Roboto', sans-serif;
     font-size: smaller;
-
+    margin-left: auto;
 }
+
 .respond:hover{
     cursor: pointer;
 }
@@ -309,7 +318,7 @@ h5 {
     }
 
     #chat{
-        height: 100vh;
+        height: auto;
         width: 100%;
     }
 
@@ -412,10 +421,15 @@ h5 {
     margin-left: 5px;
 }
 
+.responseinputcontainer{
+    width: auto;
+    margin-right: 9px;
+}
+
 .responseinput{
     display: none;
-    height:18px;
-    width: 95%; 
+    height: 36px;
+    width: 97%;
     opacity: 0.6;
     border: none;
     padding-left: 5px;
@@ -423,6 +437,8 @@ h5 {
     margin: none;
     font-family: 'Lato', sans-serif;
     background-color: white;
+    
+    
 }
 
 .responseinput:focus{
@@ -553,4 +569,16 @@ input[type=number] {
 #individual_notification:hover{
     background-color: black;
     
+}
+
+#comment_button{
+    text-align: right;
+}
+
+#noPosts{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    font-size: 20px;
+    opacity: 0.7;
 }

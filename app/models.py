@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     notifications = db.relationship('UserNotifications', backref='author', lazy='dynamic')
     post_responses = db.relationship('PostResponse', backref='author', lazy='dynamic')
-    image = db.Column(db.String(64), default='images/default.jpg') # Link to user image
+    image = db.Column(db.String(64), default='static/images/default.jpg') # Link to user image
     color = db.Column(db.String(64), default='#FFFFFF') # User Hex color
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
@@ -134,37 +134,38 @@ class Post(db.Model):
 
 class PostResponse(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    response_to_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    response_to_post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    response_to_user_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     body = db.Column(db.String(140))
     score = db.Column(db.Integer, index=True, default=0)
 
     def to_dict(self):
-        parent_user_id = Post.query.get(self.response_to_id).user_id
         data = {
             'id': self.id,
             'user_id': self.user_id,
             'username': User.query.get(self.user_id).username,
             'color': User.query.get(self.user_id).color,
             'image': User.query.get(self.user_id).image,
-            'response_to_username': User.query.get(parent_user_id).username,
-            'response_to_color': User.query.get(parent_user_id).color,
-            'response_to_id': self.response_to_id,
+            'response_to_user_id': self.response_to_user_id,
+            'response_to_username': User.query.get(self.response_to_user_id).username,
+            'response_to_color': User.query.get(self.response_to_user_id).color,
+            'response_to_post_id': self.response_to_post_id,
             'timestamp': self.timestamp,
             'body': self.body,
             'score': self.score,
             '_links': {
                 'self': url_for('api.get_response', id=self.id),
-                'parent_post': url_for('api.get_post', id=self.response_to_id),
-                'thread': url_for('api.get_posts', thread_hash=Post.query.get(self.response_to_id).thread),
-                'respond_to': url_for('api.respond_to', id=Post.query.get(self.response_to_id).id)
+                'parent_post': url_for('api.get_post', id=self.response_to_post_id),
+                'thread': url_for('api.get_posts', thread_hash=Post.query.get(self.response_to_post_id).thread),
+                'respond_to': url_for('api.respond_to', id=Post.query.get(self.response_to_post_id).id)
             }
         }
         return data
 
     def from_dict(self, data):
-        for field in ['response_to_id', 'body', 'user_id']:
+        for field in ['response_to_post_id', 'response_to_user_id', 'body', 'user_id']:
             if field in data:
                 setattr(self, field, data[field])
 

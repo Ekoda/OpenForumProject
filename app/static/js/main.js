@@ -37,33 +37,3 @@ $('#notification-button').click(function(e){
     e.stopPropagation();
     $('#notificationbox').show();
 })
-
-
-
-
-//Scales text area with increasing text
-$("textarea").keyup(function(e) {
-    while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
-        $(this).height($(this).height()+1);
-    };
-});
-
-// Show input field on press and send & hide if containing value
-$('#replybuttonIDx').click(function(){
-    $('#replyinputIDx').css('display', 'block');
-    if($('#replyinputIDx').val()){
-        // SEND REPLY HERE
-        $('#replyinputIDx').css('display', 'none');
-        $('#replyinputIDx').val('')
-    }
-})
-
-$('.respond').click(function(){
-    let commentID = $(this).attr('id');
-    $('#replyinputID' + commentID).css('display', 'block');
-    if($('#replyinputID' + commentID).val()){
-        // SEND REPLY HERE
-        $('#replyinputID' + commentID).css('display', 'none');
-        $('#replyinputID' + commentID).val('')
-    }
-})

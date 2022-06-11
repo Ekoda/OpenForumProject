@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<header>
+    <div id="head"></div>
+</header>
+
+    <div id="main">
+        <object id="web" type="text/html" data="https://www.wikipedia.org/" >   
+        </object>
+        
+        <i class="fas fa-chevron-right" id="hideopenforum"></i>
+
+        <div id="chat">
+            <div id="chathead">
+                <div id="profile">
+
+                <div id="brand">
+                    <p>Open Forum</p>
+                </div>
+
+                {% if not authenticated %}
+                <div id="signbox"> 
+                    <a class="sign" id="signin">Sign in</a>
+                    <a href="{{ url_for('auth.signup') }}" class="sign">Create account</a>
+                </div>
+
+                <div id="sign_in_container">
+                    
+                    <div id="sign_in_field_box" >
+                        <form action="" method="post" novalidate>
+                            {{ form.hidden_tag() }}
+                            {{ form.email(size=120,class="main_signin", id="sign_in_email", type=email, placeholder="Email") }}
+                            {{ form.password(size=32, class="main_signin", id="sign_in_password", placeholder="Password") }}
+                            </div>
+                            <div id="submit_button_box">
+                                {{ form.submit(class="sign", id="main_signin_button") }}
+                                <a href="{{ url_for('auth.resetpassword') }}" id="forgot_password">Forgot password?</a>
+                            </div>
+                        </form>
+                    
+                </div>
+                {% endif %}
+
+                {% if authenticated %}
+                <div id="info">
+                    <i class="fas fa-globe-europe"></i>
+                    <i class="fas fa-envelope"></i>
+                    <i class="fas fa-bell" id="notification-button">                    
+                        <div id="no-notifications">
+                            {{ user.numberofnotifications }}
+                        </div>
+                        <div id="notificationbox">
+                            {% for notifications in notifications %}
+                            <div class="notification" id="individual_notification">
+                                <img class="responsepic" src="{{ url_for('static', filename=notifications.image) }}">
+                                <div class="textnotificationbox">
+                                <p class="notificationtext"><block class="at" style="{{ notifications.color }}">{{ notifications.from.user }}</block> {{ notifications.text }}</p>
+                                <p class="timer">{{ notifications.time }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </i>            
+                </div>
+                <img id="picture" src="{{ user.image }}">
+                {% endif %}
+
+            </div>
+
+            <div id="thread_container">
+                
+            </div>
+
+        </div>
+    </div>
+    <script type="text/babel" src="{{ url_for('static',filename='js/thread.js') }}"></script>
+{% endblock %}
